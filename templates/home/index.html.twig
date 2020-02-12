@@ -1,20 +1,140 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}{{ 'homepage.title'|trans }}{{ 'title_ending'|trans }}{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <!-- Banner -->
+    <section id="banner">
+        <div class="inner">
+            <h1>Industrious</h1>
+            <p>A responsive business oriented template with a video background<br />
+                designed by <a href="https://templated.co/">TEMPLATED</a> and released under the Creative Commons License.</p>
+        </div>
+        <video autoplay loop muted playsinline src="{{ asset('build/images/banner02.mp4') }}"></video>
+    </section>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <!-- Highlights -->
+    <section class="wrapper">
+        <div class="inner">
+            <header class="special">
+                <h2>Sem turpis amet semper</h2>
+                <p>In arcu accumsan arcu adipiscing accumsan orci ac. Felis id enim aliquet. Accumsan ac integer lobortis commodo ornare aliquet accumsan erat tempus amet porttitor.</p>
+            </header>
+            <div class="highlights">
+                <section>
+                    <div class="content">
+                        <header>
+                            <a href="#" class="icon fa-vcard-o"><span class="label">Icon</span></a>
+                            <h3>Feugiat consequat</h3>
+                        </header>
+                        <p>Nunc lacinia ante nunc ac lobortis ipsum. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus.</p>
+                    </div>
+                </section>
+                <section>
+                    <div class="content">
+                        <header>
+                            <a href="#" class="icon fa-files-o"><span class="label">Icon</span></a>
+                            <h3>Ante sem integer</h3>
+                        </header>
+                        <p>Nunc lacinia ante nunc ac lobortis ipsum. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus.</p>
+                    </div>
+                </section>
+                <section>
+                    <div class="content">
+                        <header>
+                            <a href="#" class="icon fa-floppy-o"><span class="label">Icon</span></a>
+                            <h3>Ipsum consequat</h3>
+                        </header>
+                        <p>Nunc lacinia ante nunc ac lobortis ipsum. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus.</p>
+                    </div>
+                </section>
+                <section>
+                    <div class="content">
+                        <header>
+                            <a href="#" class="icon fa-line-chart"><span class="label">Icon</span></a>
+                            <h3>Interdum gravida</h3>
+                        </header>
+                        <p>Nunc lacinia ante nunc ac lobortis ipsum. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus.</p>
+                    </div>
+                </section>
+                <section>
+                    <div class="content">
+                        <header>
+                            <a href="#" class="icon fa-paper-plane-o"><span class="label">Icon</span></a>
+                            <h3>Faucibus consequat</h3>
+                        </header>
+                        <p>Nunc lacinia ante nunc ac lobortis ipsum. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus.</p>
+                    </div>
+                </section>
+                <section>
+                    <div class="content">
+                        <header>
+                            <a href="#" class="icon fa-qrcode"><span class="label">Icon</span></a>
+                            <h3>Accumsan viverra</h3>
+                        </header>
+                        <p>Nunc lacinia ante nunc ac lobortis ipsum. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus.</p>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </section>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/var/www/src/Controller/HomeController.php'|file_link(0) }}">src/Controller/HomeController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/var/www/templates/home/index.html.twig'|file_link(0) }}">templates/home/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <!-- CTA -->
+    <section id="cta" class="wrapper">
+        <div class="inner">
+            <h2>Curabitur ullamcorper ultricies</h2>
+            <p>Nunc lacinia ante nunc ac lobortis. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus ornare mi ut ante amet placerat aliquet. Volutpat eu sed ante lacinia sapien lorem accumsan varius montes viverra nibh in adipiscing. Lorem ipsum dolor vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing sed feugiat eu faucibus. Integer ac sed amet praesent. Nunc lacinia ante nunc ac gravida.</p>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="wrapper">
+        <div class="inner">
+            <header class="special">
+                <h2>Faucibus consequat lorem</h2>
+                <p>In arcu accumsan arcu adipiscing accumsan orci ac. Felis id enim aliquet. Accumsan ac integer lobortis commodo ornare aliquet accumsan erat tempus amet porttitor.</p>
+            </header>
+            <div class="testimonials">
+                <section>
+                    <div class="content">
+                        <blockquote>
+                            <p>Nunc lacinia ante nunc ac lobortis ipsum. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus.</p>
+                        </blockquote>
+                        <div class="author">
+                            <div class="image">
+                                <img src="{{ asset('build/images/pic01.jpg') }}" alt="" />
+                            </div>
+                            <p class="credit">- <strong>Jane Doe</strong> <span>CEO - ABC Inc.</span></p>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <div class="content">
+                        <blockquote>
+                            <p>Nunc lacinia ante nunc ac lobortis ipsum. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus.</p>
+                        </blockquote>
+                        <div class="author">
+                            <div class="image">
+                                <img src="{{ asset('build/images/pic03.jpg') }}" alt="" />
+                            </div>
+                            <p class="credit">- <strong>John Doe</strong> <span>CEO - ABC Inc.</span></p>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <div class="content">
+                        <blockquote>
+                            <p>Nunc lacinia ante nunc ac lobortis ipsum. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus.</p>
+                        </blockquote>
+                        <div class="author">
+                            <div class="image">
+                                <img src="{{ asset('build/images/pic02.jpg') }}" alt="" />
+                            </div>
+                            <p class="credit">- <strong>Janet Smith</strong> <span>CEO - ABC Inc.</span></p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </section>
 {% endblock %}
