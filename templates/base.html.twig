@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
-    <meta name="description" content="Développeur Web FullStack Symfony, disponible sur Angers ou Paris - Dylan ALIZON Développement">
+    <meta name="description" content="Développeur Web FullStack Symfony, disponible sur Angers ou en remote - Dylan ALIZON Développement">
     <title>{% block title %}Welcome!{% endblock %}</title>
     <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
     {% block stylesheets %}
@@ -13,21 +13,28 @@
 <body class="is-preload">
 
 <!-- Header -->
-<header id="header">
-    <a class="logo" href="#">Industrious</a>
-    <nav>
-        <a href="#menu">Menu</a>
+<header class="header">
+    <nav class="header__nav">
+        <div class="header__logo">
+            <a href="{{ path('home') }}">
+                <img src="{{ asset('build/images/logo.png') }}" alt="{{ 'logo_alt'|trans }}">
+            </a>
+        </div>
+        <div id="header__mainListDiv" class="header__main_list">
+            <ul class="header__navlinks">
+                <li><a href="#">About</a></li>
+                <li><a href="#">Portfolio</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+        </div>
+        <span class="header__navTrigger">
+                <i></i>
+                <i></i>
+                <i></i>
+            </span>
     </nav>
 </header>
-
-<!-- Nav -->
-<nav id="menu">
-    <ul class="links">
-        <li><a href="#">Home</a></li>
-        <li><a href="#">Elements</a></li>
-        <li><a href="#">Generic</a></li>
-    </ul>
-</nav>
 
 {% block body %}{% endblock %}
 
@@ -51,8 +58,10 @@
             <section>
                 <h4>{{ 'footer.contact_me'|trans }}</h4>
                 <ul class="plain">
-                    <li><a href="https://www.instagram.com/dylanalizon/" target="_blank"><i class="icon fa-instagram">&nbsp;</i>Instagram</a></li>
-                    <li><a href="https://github.com/dylanalizon" target="_blank"><i class="icon fa-github">&nbsp;</i>Github</a></li>
+                    <li><a href="https://www.instagram.com/dylanalizon/" target="_blank"><div class="icon-container"><i class="icon fab fa-instagram"></i></div>Instagram</a></li>
+                    <li><a href="https://github.com/dylanalizon" target="_blank"><div class="icon-container"><i class="icon fab fa-github"></i></div>Github</a></li>
+                    <li><a href="mailto:dylan.alizon@gmail.com" target="_blank"><div class="icon-container"><i class="icon fas fa-envelope"></i></div>Email</a></li>
+                    <li><div class="icon-container"><i class="icon fas fa-mobile-alt"></i></div>06 72 47 22 30</li>
                 </ul>
             </section>
         </div>
