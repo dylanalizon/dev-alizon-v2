@@ -13,28 +13,7 @@
 <body class="is-preload">
 
 <!-- Header -->
-<header class="header">
-    <nav class="header__nav">
-        <div class="header__logo">
-            <a href="{{ path('home') }}">
-                <img src="{{ asset('build/images/logo.png') }}" alt="{{ 'logo_alt'|trans }}">
-            </a>
-        </div>
-        <div id="header__mainListDiv" class="header__main_list">
-            <ul class="header__navlinks">
-                <li><a href="#">About</a></li>
-                <li><a href="#">Portfolio</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </div>
-        <span class="header__navTrigger">
-                <i></i>
-                <i></i>
-                <i></i>
-            </span>
-    </nav>
-</header>
+{% include '_navbar.html.twig' %}
 
 {% block body %}{% endblock %}
 
@@ -55,8 +34,7 @@
                     <li><a href="#">Dolor pulvinar magna etiam.</a></li>
                 </ul>
             </section>
-            <section>
-                <h4>{{ 'footer.contact_me'|trans }}</h4>
+            <section class="footer__contact-details">
                 <ul class="plain">
                     <li><a href="https://www.instagram.com/dylanalizon/" target="_blank"><div class="icon-container"><i class="icon fab fa-instagram"></i></div>Instagram</a></li>
                     <li><a href="https://github.com/dylanalizon" target="_blank"><div class="icon-container"><i class="icon fab fa-github"></i></div>Github</a></li>

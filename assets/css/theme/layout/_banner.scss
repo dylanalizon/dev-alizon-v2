@@ -36,12 +36,19 @@
 		}
 
 		h1 {
-			font-size: 4rem;
+			font-family: Gemunu, Arial, Helvetica, sans-serif;
 			margin-bottom: 1rem;
+			b {
+				font-family: Raleway, Arial, Helvetica, sans-serif;
+			}
 		}
 
 		p {
 			font-size: 1.5rem;
+			b {
+				font-size: 1.7rem;
+				font-family: Gemunu, Arial, Helvetica, sans-serif;
+			}
 		}
 
 		a {
@@ -108,7 +115,7 @@
 		@include breakpoint('<=small') {
 			height: auto !important;
 			min-height: 0;
-			padding: 4rem 2rem 4rem 2rem;
+			padding: 6rem 2rem 4rem 2rem;
 
 			.inner {
 				width: 100%;

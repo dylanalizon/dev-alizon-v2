@@ -1,7 +1,9 @@
 title_ending: ' - Dylan ALIZON Développement'
 logo_alt: 'Logo de la société Dylan ALIZON'
 homepage:
+    h1: '<b>Dylan ALIZON</b> - Développeur Symfony & Vue.js'
+    h1_description: 'Conception de sites internet et applications web sur mesure.'
+    h1_description_2: 'Disponible sur <b>Angers</b> et sa région ou en <b>remote</b>.'
     title: 'Développeur Web Symfony - Angers'
 footer:
-    contact_me: 'Me contacter'
     bottom_line: 'Site réalisé avec Symfony 5'
