@@ -1,9 +1,19 @@
 title_ending: ' - Dylan ALIZON Développement'
 logo_alt: 'Logo de la société Dylan ALIZON'
+navigation:
+    home: 'Accueil'
+    services: 'Services'
+    career: 'Mon parcours'
+    contact: 'Contact'
 homepage:
     h1: '<b>Dylan ALIZON</b> - Développeur Symfony & Vue.js'
     h1_description: 'Conception de sites internet et applications web sur mesure.'
     h1_description_2: 'Disponible sur <b>Angers</b> et sa région ou en <b>remote</b>.'
     title: 'Développeur Web Symfony - Angers'
+    who_i_am: 'Qui suis-je ?'
+    short_description: 'Je m’appelle Dylan Alizon et suis développeur web depuis près de 5 ans. Je propose mes services pour le développement d’application web, d’API et de sites internet sur mesure.'
+    photo_alt: 'Photo de Dylan ALIZON'
+    short_description_2: 'Passioné par le développment web depuis mes débuts dans l''informatique, je suis constamment son évolution et m''adapte rapidement à ses nouveautés. '
+    know_more_about_skills: 'Vous souhaitez en savoir plus sur mes compétences ?'
 footer:
     bottom_line: 'Site réalisé avec Symfony 5'

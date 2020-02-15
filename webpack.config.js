@@ -20,6 +20,7 @@ Encore
         config.corejs = 3;
     })
     .enableSassLoader()
+    .enablePostCssLoader()
     .autoProvidejQuery()
     .copyFiles({
         from: './assets/images',

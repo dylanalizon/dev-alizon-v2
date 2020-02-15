@@ -19,37 +19,18 @@
     <section class="wrapper">
         <div class="inner">
             <header class="special">
-                <h2>Sem turpis amet semper</h2>
-                <p>In arcu accumsan arcu adipiscing accumsan orci ac. Felis id enim aliquet. Accumsan ac integer lobortis commodo ornare aliquet accumsan erat tempus amet porttitor.</p>
+                <h2>{{ 'homepage.who_i_am'|trans }}</h2>
+                <p>{{ 'homepage.short_description'|trans }}</p>
             </header>
-            <div class="highlights">
-                <section>
-                    <div class="content">
-                        <header>
-                            <a href="#" class="icon fa-vcard-o"><span class="label">Icon</span></a>
-                            <h3>Feugiat consequat</h3>
-                        </header>
-                        <p>Nunc lacinia ante nunc ac lobortis ipsum. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus.</p>
+            <div class="flex flex-wrap md:flex-no-wrap">
+                <div class="w-full md:w-auto md:mr-6 text-center">
+                    <div class="homepage__photo-container">
+                        <img class="homepage__photo" src="{{ asset('build/images/photo.jpg') }}" alt="{{ 'homepage.photo_alt'|trans }}">
                     </div>
-                </section>
-                <section>
-                    <div class="content">
-                        <header>
-                            <a href="#" class="icon fa-files-o"><span class="label">Icon</span></a>
-                            <h3>Ante sem integer</h3>
-                        </header>
-                        <p>Nunc lacinia ante nunc ac lobortis ipsum. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus.</p>
-                    </div>
-                </section>
-                <section>
-                    <div class="content">
-                        <header>
-                            <a href="#" class="icon fa-floppy-o"><span class="label">Icon</span></a>
-                            <h3>Ipsum consequat</h3>
-                        </header>
-                        <p>Nunc lacinia ante nunc ac lobortis ipsum. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus.</p>
-                    </div>
-                </section>
+                </div>
+                <div class="w-full md:w-auto flex-grow">
+                    <p>{{ 'homepage.short_description_2'|trans }}</p>
+                </div>
             </div>
         </div>
     </section>
