@@ -10,10 +10,16 @@ homepage:
     h1_description: 'Conception de sites internet et applications web sur mesure.'
     h1_description_2: 'Disponible sur <b>Angers</b> et sa région ou en <b>remote</b>.'
     title: 'Développeur Web Symfony - Angers'
-    who_i_am: 'Qui suis-je ?'
-    short_description: 'Je m’appelle Dylan Alizon et suis développeur web depuis près de 5 ans. Je propose mes services pour le développement d’application web, d’API et de sites internet sur mesure.'
-    photo_alt: 'Photo de Dylan ALIZON'
-    short_description_2: 'Passioné par le développment web depuis mes débuts dans l''informatique, je suis constamment son évolution et m''adapte rapidement à ses nouveautés. '
-    know_more_about_skills: 'Vous souhaitez en savoir plus sur mes compétences ?'
+    who_i_am:
+        label: 'Qui suis-je ?'
+        short_description: 'Je m’appelle Dylan Alizon et suis développeur web depuis près de 5 ans. Je propose mes services pour le développement d’application web, d’API et de sites internet sur mesure.'
+        photo_alt: 'Photo de Dylan ALIZON'
+        paragraph_1: 'Je suis diplomé d''un titre de <b>Développeur Logiciel</b> (Bac +2) et d''un <b>Bachelor Développeur Digital</b> (Bac +3). J''ai effectué les deux dernières années en <b>alternance</b> ce qui m''a permis de mettre en pratique très rapidement ce que j''apprenais au cours de mes formations. Après l''obtention de mes diplômes j''ai intégré une équipe de développeur au sein d''un éditeur de logiciel puis d''une agence web.'
+        paragraph_2: 'En parallèle des mes formations et de mes activités salariés j''effectue des missions en tant que <b>développeur freelance</b>.'
+        question: 'Vous voulez en savoir plus sur mes <b>études</b> et mes <b>expériences</b> ?'
+        button: 'Voir mon parcours'
+    technologies_skills:
+        label: 'Compétences et technologies'
+        question: 'Vous souhaitez en savoir plus sur mes compétences ou sur les technologies que j''utilise ?'
 footer:
     bottom_line: 'Site réalisé avec Symfony 5'

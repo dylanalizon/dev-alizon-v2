@@ -16,20 +16,25 @@
     </section>
 
     <!-- Highlights -->
-    <section class="wrapper">
+    <section class="py-20">
         <div class="inner">
             <header class="special">
-                <h2>{{ 'homepage.who_i_am'|trans }}</h2>
-                <p>{{ 'homepage.short_description'|trans }}</p>
+                <h2 class="font-gemunu text-4xl">{{ 'homepage.who_i_am.label'|trans }}</h2>
+                <p>{{ 'homepage.who_i_am.short_description'|trans }}</p>
             </header>
             <div class="flex flex-wrap md:flex-no-wrap">
-                <div class="w-full md:w-auto md:mr-6 text-center">
+                <div class="w-full md:w-auto md:mr-6 text-center" style="min-width: 300px;">
                     <div class="homepage__photo-container">
-                        <img class="homepage__photo" src="{{ asset('build/images/photo.jpg') }}" alt="{{ 'homepage.photo_alt'|trans }}">
+                        <img class="homepage__photo" src="{{ asset('build/images/photo.jpg') }}" alt="{{ 'homepage.who_i_am.photo_alt'|trans }}">
                     </div>
                 </div>
-                <div class="w-full md:w-auto flex-grow">
-                    <p>{{ 'homepage.short_description_2'|trans }}</p>
+                <div class="w-full md:w-auto flex-grow text-justify">
+                    <p>{{ 'homepage.who_i_am.paragraph_1'|trans|raw }}</p>
+                    <p class="mt-6">{{ 'homepage.who_i_am.paragraph_2'|trans|raw }}</p>
+                    <p class="mt-6">{{ 'homepage.who_i_am.question'|trans|raw }}</p>
+                    <div class="mt-6 text-center">
+                        <a href="#" class="btn">{{ 'homepage.who_i_am.button'|trans }}</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -38,8 +43,15 @@
     <!-- CTA -->
     <section id="cta" class="wrapper">
         <div class="inner">
-            <h2>Curabitur ullamcorper ultricies</h2>
-            <p>Nunc lacinia ante nunc ac lobortis. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus ornare mi ut ante amet placerat aliquet. Volutpat eu sed ante lacinia sapien lorem accumsan varius montes viverra nibh in adipiscing. Lorem ipsum dolor vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing sed feugiat eu faucibus. Integer ac sed amet praesent. Nunc lacinia ante nunc ac gravida.</p>
+            <h2 class="font-gemunu text-4xl">{{ 'homepage.technologies_skills.label'|trans }}</h2>
+            <div class="flex flex-wrap">
+                <div class="card w-full md:w-1/2">
+                    Test
+                </div>
+                <div class="card w-full md:w-1/2">
+                    Test
+                </div>
+            </div>
         </div>
     </section>
 {% endblock %}

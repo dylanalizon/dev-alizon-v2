@@ -1,12 +1,20 @@
+// Tailwindcss
 @import "~tailwindcss/base";
 @import "~tailwindcss/components";
 @import "~tailwindcss/utilities";
-@import "theme/theme";
 
+// General
+@import "theme/theme";
 @import "variables";
 @import "fonts";
-@import "navbar";
-@import "footer";
+
+// Layouts
+@import "layouts/navbar";
+@import "layouts/footer";
 
 // Pages
-@import "homepage";
+@import "pages/homepage";
+
+// Components
+@import "components/button";
+@import "components/card";

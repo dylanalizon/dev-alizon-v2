@@ -13,6 +13,9 @@ module.exports = {
     extend: {
       colors: {
         'primary': '#b03f3f'
+      },
+      fontFamily: {
+        'gemunu': ['Gemunu', 'Helvetica', 'Arial', 'sans-serif']
       }
     }
   }
