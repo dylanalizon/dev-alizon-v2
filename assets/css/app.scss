@@ -8,13 +8,15 @@
 @import "variables";
 @import "fonts";
 
+// Components
+@import "components/button";
+@import "components/card";
+@import "components/scrollbar";
+@import "components/progress-bar";
+
 // Layouts
 @import "layouts/navbar";
 @import "layouts/footer";
 
 // Pages
 @import "pages/homepage";
-
-// Components
-@import "components/button";
-@import "components/card";
