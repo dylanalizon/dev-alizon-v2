@@ -2,7 +2,7 @@ title_ending: ' - Dylan ALIZON Développement'
 logo_alt: 'Logo de la société Dylan ALIZON'
 navigation:
     home: 'Accueil'
-    services: 'Services'
+    skills_technologies: 'Compétences & technologies'
     career: 'Mon parcours'
     contact: 'Contact'
 homepage:
@@ -18,7 +18,7 @@ homepage:
         paragraph_2: 'En parallèle des mes formations et de mes activités salariés j''effectue des missions en tant que <b>développeur freelance</b>.'
         question: 'Vous voulez en savoir plus sur mes <b>études</b> et mes <b>expériences</b> ?'
         button: 'Voir mon parcours'
-    technologies_skills:
+    skills_technologies:
         label: 'Compétences & technologies'
         short_description: 'L''utilisation d''un <b>framework</b> n''est pas une obligation, mais c''est une bonne pratique pour simplifier la vie d''un développeur. J''utilise <b>Symfony</b> comme framework backend et <b>Vue.js</b> si besoin côté frontend.'
         card_1:
@@ -41,6 +41,13 @@ homepage:
                 4: 'Apprentissage facile'
                 5: 'Bonne documentation'
             button: 'Découvrir Vue.js'
-        question: 'Vous souhaitez en savoir plus sur mes compétences ou sur les technologies que j''utilise ?'
+        question: 'Vous souhaitez découvrir toutes mes compétences & l''ensemble des technologies que j''utilise ?'
+        button: 'Voir mes compétences & technologies'
+    contact:
+        label: 'Un site web à créer ? Besoin d''un développeur freelance ?'
+        button: 'Me contacter'
 footer:
+    by_the_way:
+        title: 'À propos'
+        paragraph: 'Je m’appelle Dylan Alizon et suis développeur web depuis près de 5 ans. Je propose mes services pour le développement d’application web, d’API et de sites internet sur mesure. Je suis disponible sur Angers et sa région ou remote (télétravail). Ce site a pour but de présenter mon parcours, mes compétences et les technologies que j''utilise pour mener à bien mes projets. N''hésiter pas à prendre contact via le formulaire de contact pour tout renseignement.'
     bottom_line: 'Site réalisé avec Symfony 5'

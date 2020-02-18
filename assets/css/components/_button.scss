@@ -11,9 +11,14 @@
   text-transform: uppercase;
   font-family: Roboto,serif;
   font-weight: 700;
-  font-size: .8rem;
   letter-spacing: 2px;
-  &:hover {
+
+  &.btn-white {
+    border-color: #ffffff;
+    color: #ffffff;
+  }
+
+  &:hover, &.btn-white:hover {
     background: $color-primary;
     border-color: $color-primary;
     color: #fff;
