@@ -10,3 +10,23 @@
     vertical-align: middle;
   }
 }
+
+.homepage__cta {
+
+  .homepage__cta-short-description b {
+    color: #ffffff;
+  }
+
+  ul {
+    list-style: none;
+
+    li {
+      margin-top: 1rem;
+      font-size: 1.25rem;
+
+      svg {
+        color: #46ab2b;
+      }
+    }
+  }
+}

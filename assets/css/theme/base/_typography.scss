@@ -30,11 +30,6 @@
 
 	a {
 		@include vendor('transition', 'color #{_duration(transition)} ease-in-out');
-		text-decoration: underline;
-
-		&:hover {
-			text-decoration: none;
-		}
 	}
 
 	strong, b {

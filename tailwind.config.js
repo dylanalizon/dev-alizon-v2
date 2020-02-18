@@ -12,10 +12,12 @@ module.exports = {
     },
     extend: {
       colors: {
-        'primary': '#b03f3f'
+        'primary': '#b03f3f',
+        'text-color': '#444444'
       },
       fontFamily: {
-        'gemunu': ['Gemunu', 'Helvetica', 'Arial', 'sans-serif']
+        'gemunu': ['Gemunu', 'Helvetica', 'Arial', 'sans-serif'],
+        'roboto': ['Roboto', 'Helvetica', 'Arial', 'sans-serif']
       }
     }
   }

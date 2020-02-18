@@ -4,4 +4,18 @@
   color: $color-text;
   box-shadow: 0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -2px rgba(0,0,0,.05);
   border-radius: .25rem;
+  padding: 1rem 1.5rem;
+
+  &.card-transparent {
+    background: rgba(#ffffff, .8);
+    transition: background .3s ease-in-out;
+
+    &:hover {
+      background: #ffffff;
+    }
+
+    @media screen and (max-width: 769px) {
+      background: #ffffff;
+    }
+  }
 }

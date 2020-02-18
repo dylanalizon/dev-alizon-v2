@@ -19,7 +19,28 @@ homepage:
         question: 'Vous voulez en savoir plus sur mes <b>études</b> et mes <b>expériences</b> ?'
         button: 'Voir mon parcours'
     technologies_skills:
-        label: 'Compétences et technologies'
+        label: 'Compétences & technologies'
+        short_description: 'L''utilisation d''un <b>framework</b> n''est pas une obligation, mais c''est une bonne pratique pour simplifier la vie d''un développeur. J''utilise <b>Symfony</b> comme framework backend et <b>Vue.js</b> si besoin côté frontend.'
+        card_1:
+            title: 'Symfony'
+            logo_alt: 'Logo de Symfony'
+            pros:
+                1: 'Fiabilité'
+                2: 'Grande flexibilité'
+                3: 'Grande communauté'
+                4: 'Bonne documentation'
+                5: 'Régulièrement mis à jour'
+            button: 'Découvrir Symfony'
+        card_2:
+            title: 'Vue.js'
+            logo_alt: 'Logo de Vue.js'
+            pros:
+                1: 'Léger'
+                2: 'Performant'
+                3: 'Polyvalent'
+                4: 'Apprentissage facile'
+                5: 'Bonne documentation'
+            button: 'Découvrir Vue.js'
         question: 'Vous souhaitez en savoir plus sur mes compétences ou sur les technologies que j''utilise ?'
 footer:
     bottom_line: 'Site réalisé avec Symfony 5'
