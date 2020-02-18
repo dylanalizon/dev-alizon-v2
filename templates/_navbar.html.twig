@@ -11,7 +11,7 @@
             <ul class="header__navlinks">
                 <li><a href="{{ path('home') }}" {% if routeName == 'home' %}class="active"{% endif %}>{{ 'navigation.home'|trans }}</a></li>
                 <li><a href="#">{{ 'navigation.skills_technologies'|trans }}</a></li>
-                <li><a href="#">{{ 'navigation.career'|trans }}</a></li>
+                <li><a href="{{ path('career') }}" {% if routeName == 'career' %}class="active"{% endif %}>{{ 'navigation.career'|trans }}</a></li>
                 <li><a href="#">{{ 'navigation.contact'|trans }}</a></li>
             </ul>
         </div>

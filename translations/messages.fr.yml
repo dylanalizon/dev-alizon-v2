@@ -46,8 +46,11 @@ homepage:
     contact:
         label: 'Un site web à créer ? Besoin d''un développeur freelance ?'
         button: 'Me contacter'
+career:
+    title: 'Mon parcours'
+    h1: 'Mon parcours'
 footer:
     by_the_way:
         title: 'À propos'
-        paragraph: 'Je m’appelle Dylan Alizon et suis développeur web depuis près de 5 ans. Je propose mes services pour le développement d’application web, d’API et de sites internet sur mesure. Je suis disponible sur Angers et sa région ou remote (télétravail). Ce site a pour but de présenter mon parcours, mes compétences et les technologies que j''utilise pour mener à bien mes projets. N''hésiter pas à prendre contact via le formulaire de contact pour tout renseignement.'
+        paragraph: 'Je m’appelle Dylan Alizon et suis développeur web depuis près de 5 ans. Je propose mes services pour le développement d’application web, d’API et de sites internet sur mesure. Je suis disponible sur Angers et sa région ou remote (télétravail). Ce site a pour but de présenter mon parcours, mes compétences et les technologies que j''utilise pour mener à bien mes projets. N''hésitez pas à m''envoyer un message via le formulaire de contact pour tout renseignement.'
     bottom_line: 'Site réalisé avec Symfony 5'

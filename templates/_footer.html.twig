@@ -3,13 +3,13 @@
         <div class="content">
             <section>
                 <h3>{{ 'footer.by_the_way.title'|trans }}</h3>
-                <p class="text-justify">{{ 'footer.by_the_way.paragraph'|trans }}</p>
+                <p class="text-justify mb-10">{{ 'footer.by_the_way.paragraph'|trans }}</p>
             </section>
             <section class="flex items-center">
                 <ul class="alt w-full">
                     <li><a href="{{ path('home') }}">{{ 'navigation.home'|trans }}</a></li>
                     <li><a href="#">{{ 'navigation.skills_technologies'|trans }}</a></li>
-                    <li><a href="#">{{ 'navigation.career'|trans }}</a></li>
+                    <li><a href="{{ path('career') }}">{{ 'navigation.career'|trans }}</a></li>
                     <li><a href="#">{{ 'navigation.contact'|trans }}</a></li>
                 </ul>
             </section>
