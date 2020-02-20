@@ -3,27 +3,34 @@
 namespace App\Command;
 
 use App\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
-use Symfony\Component\Console\Style\SymfonyStyle;
-use Symfony\Component\Security\Core\Encoder\EncoderFactoryInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserInitCommand extends Command
 {
     protected static $defaultName = 'app:user:create';
-    /**
-     * @var EncoderFactoryInterface
-     */
-    private $encoderFactory;
 
-    public function __construct(EncoderFactoryInterface $encoderFactory)
+    /**
+     * @var UserPasswordEncoderInterface
+     */
+    private $passwordEncoder;
+
+    /**
+     * @var EntityManagerInterface
+     */
+    private $em;
+
+    public function __construct(UserPasswordEncoderInterface $passwordEncoder, EntityManagerInterface $em)
     {
         parent::__construct();
-        $this->encoderFactory = $encoderFactory;
+        $this->passwordEncoder = $passwordEncoder;
+        $this->em = $em;
     }
 
     protected function configure()
@@ -40,7 +47,6 @@ class UserInitCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $io = new SymfonyStyle($input, $output);
         $email = $input->getArgument('email');
         $password = $input->getArgument('password');
         $admin = $input->getOption('admin');
@@ -49,8 +55,10 @@ class UserInitCommand extends Command
         if ($admin) {
             $roles[] = 'ROLE_ADMIN';
         }
-
         $user = new User($email, $roles);
+        $user->setPassword($this->passwordEncoder->encodePassword($user, $password));
+        $this->em->persist($user);
+        $this->em->flush();
 
         $output->writeln(sprintf('Created user <comment>%s</comment>', $email));
 

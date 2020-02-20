@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<!-- begin::Head -->
+<head>
+    <base href="../../../">
+    <meta charset="utf-8" />
+    <title>{{ 'login.title'|trans }}{{ 'title_ending'|trans }}</title>
+    <meta name="description" content="Login page example">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700|Asap+Condensed:500">
+    {{ encore_entry_link_tags('login') }}
+    {{ encore_entry_link_tags('admin') }}
+    <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
+</head>
+
+<!-- end::Head -->
+
+<!-- begin::Body -->
+<body class="kt-page-content-white kt-quick-panel--right kt-demo-panel--right kt-offcanvas-panel--right kt-header--fixed kt-header-mobile--fixed kt-subheader--enabled kt-subheader--transparent kt-aside--enabled kt-aside--fixed kt-page--loading">
+
+<!-- begin:: Page -->
+<div class="kt-grid kt-grid--ver kt-grid--root kt-page">
+    <div class="kt-grid kt-grid--hor kt-grid--root  kt-login kt-login--v4 kt-login--signin" id="kt_login">
+        <div class="kt-grid__item kt-grid__item--fluid kt-grid kt-grid--hor" style="background-image: url({{ asset('build/images/login-bg.jpg') }});">
+            <div class="kt-grid__item kt-grid__item--fluid kt-login__wrapper">
+                <div class="kt-login__container">
+                    <div class="kt-login__logo">
+                        <a href="#">
+                            <img src="{{ asset('build/images/logo.png') }}">
+                        </a>
+                    </div>
+                    <div class="kt-login__signin">
+                        <div class="kt-login__head">
+                            <h1 class="kt-login__title">{{ 'login.h1'|trans }}</h1>
+                        </div>
+                        {% if error %}
+                            <div class="alert alert-danger alert-dismissible" role="alert">
+                                <div class="alert-text">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                                <div class="alert-close">
+                                    <i class="flaticon2-cross kt-icon-sm" data-dismiss="alert"></i>
+                                </div>
+                            </div>
+                        {% endif %}
+                        <form class="kt-form" method="post">
+                            <input type="hidden" name="_csrf_token"
+                                   value="{{ csrf_token('authenticate') }}"
+                            >
+                            <div class="input-group">
+                                <input class="form-control" type="email" value="{{ last_username }}" placeholder="{{ 'login.email_label'|trans }}" name="email" autocomplete="off" required autofocus>
+                            </div>
+                            <div class="input-group">
+                                <input class="form-control" type="password" placeholder="{{ 'login.password_label'|trans }}" name="password" required>
+                            </div>
+                            <div class="row kt-login__extra">
+                                <div class="col">
+                                    <label class="kt-checkbox">
+                                        <input type="checkbox" name="_remember_me"> {{ 'login.remember_me'|trans }}
+                                        <span></span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="kt-login__actions">
+                                <button id="kt_login_signin_submit" class="btn btn-brand btn-pill kt-login__btn-primary">{{ 'login.sign_in'|trans }}</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- end:: Page -->
+<script>
+  var KTAppOptions = {
+    "colors": {
+      "state": {
+        "brand": "#b03f3f",
+        "light": "#ffffff",
+        "dark": "#282a3c",
+        "primary": "#5867dd",
+        "success": "#34bfa3",
+        "info": "#36a3f7",
+        "warning": "#ffb822",
+        "danger": "#fd3995"
+      },
+      "base": {
+        "label": ["#c5cbe3", "#a1a8c3", "#3d4465", "#3e4466"],
+        "shape": ["#f0f3ff", "#d9dffa", "#afb4d4", "#646c9a"]
+      }
+    }
+  };
+</script>
+{{ encore_entry_script_tags('admin') }}
+{{ encore_entry_script_tags('login') }}
+</body>
+
+<!-- end::Body -->
+</html>
