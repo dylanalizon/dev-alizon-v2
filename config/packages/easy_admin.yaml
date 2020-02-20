@@ -1,0 +1,8 @@
+easy_admin:
+    entities:
+        - App\Entity\User
+    design:
+        assets:
+            favicon: '/favicon.png'
+        templates:
+            # layout: 'admin/layout.html.twig'

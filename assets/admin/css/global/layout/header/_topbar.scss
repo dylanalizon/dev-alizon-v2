@@ -7,7 +7,7 @@
 $kt-topbar-icon-color: rgba(#fff, 0.8);
 $kt-topbar-mobile-icon-color: kt-base-color(label, 2);
 
-$kt-topbar-icon-size: 37px;
+$kt-topbar-icon-size: 30px;
 $kt-topbar-mobile-icon-size: 30px;
 
 // General mode
@@ -101,10 +101,10 @@ $kt-topbar-mobile-icon-size: 30px;
 			}
 
 			.kt-header__topbar-wrapper {
-				img {
-					align-self: center;
-					height: $kt-topbar-icon-size;
-					border-radius: $kt-border-radius;
+				align-items: center;
+
+				i {
+					font-size: $kt-topbar-icon-size;
 				}
 			}	
 		}

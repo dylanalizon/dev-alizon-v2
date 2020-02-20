@@ -44,6 +44,10 @@
 			display: flex;
 			align-items: center;
 			justify-content: flex-start;
+
+			a, img {
+				height: 100%;
+			}
 		}
 
 		// Toolbar

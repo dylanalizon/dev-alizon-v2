@@ -17,8 +17,13 @@
 	// Brand logo
 	.kt-header__brand-logo {
 		display: flex;
-		justify-content: flex-begin;
+		justify-content: center;
 		align-items: flex-end;
+		height: 100%;
+
+		a, img {
+			height: 100%;
+		}
 	}
 
 	// Brand nav
