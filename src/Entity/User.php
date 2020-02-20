@@ -42,12 +42,6 @@ class User implements UserInterface
      */
     private $password;
 
-    public function __construct(string $email, array $roles)
-    {
-        $this->email = $email;
-        $this->roles = $roles;
-    }
-
     public function __toString()
     {
         return $this->email;

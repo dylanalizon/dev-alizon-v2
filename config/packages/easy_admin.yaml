@@ -1,8 +1,21 @@
 easy_admin:
     entities:
         - App\Entity\User
+    translation_domain: 'admin'
+    list:
+        actions:
+            - { name: 'edit', icon: 'flaticon2-contract' }
+            - { name: 'delete', icon: 'flaticon2-trash', css_class: '' }
     design:
+        menu:
+            - { route: 'home', label: 'menu.back_to_site', icon: 'home' }
+            - { label: 'menu.admin' }
+            - { entity: 'User', label: 'menu.user', icon: 'user' }
         assets:
             favicon: '/favicon.png'
         templates:
-            # layout: 'admin/layout.html.twig'
+            layout: 'admin/layout.html.twig'
+            menu: 'admin/menu.html.twig'
+            list: 'admin/list.html.twig'
+            paginator: 'admin/paginator.html.twig'
+

@@ -71,6 +71,7 @@ $kt-dropdown-menu-widths: (
         display: flex;
         flex-grow: 1;
         padding: 0.7rem 1.2rem;
+        align-items: center;
 
         @include kt-icons-size((lineawesome: 1.4rem, fontawesome: 1.4rem, flaticon: 1.3rem));
 

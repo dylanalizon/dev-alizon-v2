@@ -1,0 +1,27 @@
+{% trans_default_domain 'admin' %}
+{% set _paginator_request_parameters = _request_parameters|merge({'referer': null}) %}
+
+<div class="d-flex align-items-center justify-content-between">
+    <div>
+        {{ 'paginator.results'|transchoice(paginator.nbResults)|raw }}
+    </div>
+    <div class="kt-pagination kt-pagination--brand">
+        <ul class="kt-pagination__links">
+            <li class="kt-pagination__link--first {{ not paginator.hasPreviousPage ? 'kt-pagination__link--disabled' }}">
+                <a href="{{ paginator.currentPage == 1 ? '#' : path('easyadmin', _paginator_request_parameters|merge({ page: 1 }) ) }}"><i class="fa fa-angle-double-left kt-font-brand"></i></a>
+            </li>
+            <li class="kt-pagination__link--prev {{ not paginator.hasPreviousPage ? 'kt-pagination__link--disabled' }}">
+                <a href="{{ not paginator.hasPreviousPage ? '#' : path('easyadmin', _paginator_request_parameters|merge({ page: paginator.previousPage }) ) }}"><i class="fa fa-angle-left kt-font-brand"></i></a>
+            </li>
+            <li class="kt-pagination__link--active">
+                <a href="#">{{ paginator.currentPage }}</a>
+            </li>
+            <li class="kt-pagination__link--next {{ not paginator.hasNextPage ? 'kt-pagination__link--disabled' }}">
+                <a href="{{ not paginator.hasNextPage ? '#' : path('easyadmin', _paginator_request_parameters|merge({ page: paginator.nextPage }) ) }}"><i class="fa fa-angle-right kt-font-brand"></i></a>
+            </li>
+            <li class="kt-pagination__link--last {{ not paginator.hasNextPage ? 'kt-pagination__link--disabled' }}">
+                <a href="{{ paginator.currentPage == paginator.count ? '#' : path('easyadmin', _paginator_request_parameters|merge({ page: paginator.count }) ) }}"><i class="fa fa-angle-double-right kt-font-brand"></i></a>
+            </li>
+        </ul>
+    </div>
+</div>

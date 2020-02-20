@@ -50,7 +50,11 @@
             }
         }
        
-
+        .kt-pagination__link--disabled {
+            opacity: .3;
+            cursor: default;
+            pointer-events: none;
+        }
         
 
         .kt-pagination__link--active {     
@@ -206,5 +210,4 @@
         }
     }
 }
- 
  

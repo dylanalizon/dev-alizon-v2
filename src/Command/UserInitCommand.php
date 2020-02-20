@@ -55,7 +55,9 @@ class UserInitCommand extends Command
         if ($admin) {
             $roles[] = 'ROLE_ADMIN';
         }
-        $user = new User($email, $roles);
+        $user = new User();
+        $user->setEmail($email);
+        $user->setRoles($roles);
         $user->setPassword($this->passwordEncoder->encodePassword($user, $password));
         $this->em->persist($user);
         $this->em->flush();

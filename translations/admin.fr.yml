@@ -1,0 +1,21 @@
+menu:
+  back_to_site: 'Retourner au site'
+  admin: 'Administration'
+  user: 'Utilisateurs'
+user:
+  sign_out: 'Se déconnecter'
+action:
+  search: 'Rechercher...'
+  new: 'Créer'
+  edit: 'Éditer'
+  delete: 'Supprimer'
+  save: 'Enregister'
+  list: 'Retour à la liste'
+  cancel: 'Annuler'
+paginator:
+  results: '{0} Aucun résultat|{1} <strong>1</strong> résultat|]1,Inf] <strong>%count%</strong> résultats'
+
+# User
+User: Utilisateur
+ID: '#'
+Email: 'Adresse email'
