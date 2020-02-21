@@ -6,6 +6,13 @@ easy_admin:
         actions:
             - { name: 'edit', icon: 'flaticon2-contract' }
             - { name: 'delete', icon: 'flaticon2-trash', css_class: '' }
+    new:
+        actions:
+            - { name: 'list', css_class: 'btn btn-default btn-bold', icon: 'flaticon2-left-arrow-1' }
+    edit:
+        actions:
+            - { name: 'list', css_class: 'btn btn-default btn-bold', icon: 'flaticon2-left-arrow-1' }
+            - { name: 'delete', css_class: 'btn btn-danger btn-bold', icon: 'flaticon2-trash' }
     design:
         menu:
             - { route: 'home', label: 'menu.back_to_site', icon: 'home' }
@@ -13,9 +20,11 @@ easy_admin:
             - { entity: 'User', label: 'menu.user', icon: 'user' }
         assets:
             favicon: '/favicon.png'
+        form_theme: ['@EasyAdmin/form/bootstrap_4.html.twig', 'admin/form_theme.html.twig']
         templates:
             layout: 'admin/layout.html.twig'
+            new: 'admin/new.html.twig'
+            edit: 'admin/edit.html.twig'
             menu: 'admin/menu.html.twig'
             list: 'admin/list.html.twig'
             paginator: 'admin/paginator.html.twig'
-

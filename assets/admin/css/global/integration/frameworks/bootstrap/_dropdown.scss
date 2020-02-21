@@ -65,6 +65,10 @@ $kt-dropdown-menu-widths: (
         display: none !important;
     }
 
+    .dropdown-item.active i, .dropdown-item:active i {
+        color: #ffffff;
+    }
+
     > li > a,
     > .dropdown-item {
         outline: none !important;

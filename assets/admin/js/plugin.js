@@ -1,4 +1,4 @@
-window.jQuery = window.$ = require("jquery");
+window.$ = require("jquery");
 require("bootstrap");
 require("block-ui");
 require("autosize");

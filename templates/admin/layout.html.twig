@@ -239,6 +239,10 @@
     </script>
     {% block body_javascript %}
         {{ encore_entry_script_tags('admin') }}
+
+        <script>
+          window.jQuery = $;
+        </script>
     {% endblock body_javascript %}
 
     </body>
