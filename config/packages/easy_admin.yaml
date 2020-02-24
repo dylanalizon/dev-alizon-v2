@@ -1,6 +1,20 @@
 easy_admin:
     entities:
-        - App\Entity\User
+        TimelineItem:
+            class: 'App\Entity\TimelineItem'
+            list:
+                fields:
+                    - { property: 'position' }
+                    - { property: 'title' }
+                    - { property: 'date' }
+                    - { property: 'image', template: 'admin/field_image.html.twig' }
+            form:
+                fields:
+                    - { property: 'position' }
+                    - { property: 'title' }
+                    - { property: 'date' }
+                    - { property: 'imageFile', type: 'file' }
+                    - { property: 'description', type: 'fos_ckeditor' }
     translation_domain: 'admin'
     list:
         actions:
@@ -17,10 +31,10 @@ easy_admin:
         menu:
             - { route: 'home', label: 'menu.back_to_site', icon: 'home' }
             - { label: 'menu.admin' }
-            - { entity: 'User', label: 'menu.user', icon: 'user' }
+            - { entity: 'TimelineItem', label: 'menu.timeline_item', icon: 'history' }
         assets:
             favicon: '/favicon.png'
-        form_theme: ['@EasyAdmin/form/bootstrap_4.html.twig', 'admin/form_theme.html.twig']
+        form_theme: ['@EasyAdmin/form/bootstrap_4.html.twig', '@FOSCKEditor/Form/ckeditor_widget.html.twig', 'admin/form_theme.html.twig']
         templates:
             layout: 'admin/layout.html.twig'
             new: 'admin/new.html.twig'

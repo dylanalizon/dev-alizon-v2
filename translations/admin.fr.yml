@@ -1,7 +1,7 @@
 menu:
   back_to_site: 'Retourner au site'
   admin: 'Administration'
-  user: 'Utilisateurs'
+  timeline_item: 'Timeline'
 user:
   sign_out: 'Se déconnecter'
 action:
@@ -15,7 +15,12 @@ action:
 paginator:
   results: '{0} Aucun résultat|{1} <strong>1</strong> résultat|]1,Inf] <strong>%count%</strong> résultats'
 
-# User
-User: Utilisateur
 ID: '#'
-Email: 'Adresse email'
+# TimelineItem
+TimelineItem: 'Timeline'
+Title: 'Titre'
+Date: 'Date'
+Description: 'Description'
+Image file: 'Image'
+Position: 'Position'
+Image: 'Image'
