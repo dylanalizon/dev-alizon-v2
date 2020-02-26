@@ -25,7 +25,6 @@ class PageController extends AbstractController
     public function career(TimelineItemRepository $repository): Response
     {
         $items = $repository->findBy([], ['position' => 'DESC']);
-        dump($items);
         return $this->render('page/career.html.twig', ['items' => $items]);
     }
 }

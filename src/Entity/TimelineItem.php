@@ -3,7 +3,6 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
@@ -24,32 +23,16 @@ class TimelineItem
     /**
      * @var string
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
      */
     private $title;
 
     /**
      * @var string
      * @ORM\Column(type="text")
+     * @Assert\NotBlank()
      */
     private $description;
-
-    /**
-     * @var string|null
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $image;
-
-    /**
-     * @Vich\UploadableField(mapping="timeline_items", fileNameProperty="image")
-     * @var File
-     */
-    private $imageFile;
-
-    /**
-     * @var \DateTime
-     * @ORM\Column(type="datetime", nullable=true)
-     */
-    private $updatedImageAt;
 
     /**
      * @ORM\Column(type="smallint", unique=true)
@@ -88,6 +71,7 @@ class TimelineItem
 
     /**
      * @param string $title
+     *
      * @return $this
      */
     public function setTitle(string $title): self
@@ -107,54 +91,12 @@ class TimelineItem
 
     /**
      * @param string $description
+     *
      * @return $this
      */
     public function setDescription(string $description): self
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getImage(): ?string
-    {
-        return $this->image;
-    }
-
-    /**
-     * @param string|null $image
-     * @return TimelineItem
-     */
-    public function setImage(?string $image): self
-    {
-        $this->image = $image;
-
-        return $this;
-    }
-
-    /**
-     * @return File|null
-     */
-    public function getImageFile(): ?File
-    {
-        return $this->imageFile;
-    }
-
-    /**
-     * @param File $imageFile
-     * @return TimelineItem
-     * @throws \Exception
-     */
-    public function setImageFile(File $imageFile): self
-    {
-        $this->imageFile = $imageFile;
-
-        if ($imageFile) {
-            $this->updatedImageAt = new \DateTime('now');
-        }
 
         return $this;
     }
@@ -169,6 +111,7 @@ class TimelineItem
 
     /**
      * @param int $position
+     *
      * @return $this
      */
     public function setPosition(int $position): self

@@ -1,0 +1,13 @@
+easy_admin:
+  entities:
+    Image:
+      class: 'App\Entity\Image'
+      list:
+        fields:
+          - { property: 'id' }
+          - { property: 'fileName' }
+          - { property: 'fileSize' }
+        sort: ['id', 'DESC']
+      form:
+        fields:
+          - { property: 'file', type: 'file' }

@@ -2,6 +2,8 @@ menu:
   back_to_site: 'Retourner au site'
   admin: 'Administration'
   timeline_item: 'Timeline'
+  gallery: 'Gallerie'
+  image: 'Image'
 user:
   sign_out: 'Se déconnecter'
 action:
@@ -25,3 +27,5 @@ Image file: 'Image'
 Position: 'Position'
 Image: 'Image'
 Subtitle: 'Sous-titre'
+# Image
+File: 'Image'

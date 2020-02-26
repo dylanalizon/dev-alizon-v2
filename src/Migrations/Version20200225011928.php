@@ -14,7 +14,7 @@ final class Version20200225011928 extends AbstractMigration
 {
     public function getDescription() : string
     {
-        return '';
+        return 'Add subtitle column to timeline_item table.';
     }
 
     public function up(Schema $schema) : void
