@@ -34,12 +34,6 @@ class TimelineItem
     private $description;
 
     /**
-     * @var string
-     * @ORM\Column(type="string", length=255)
-     */
-    private $date;
-
-    /**
      * @var string|null
      * @ORM\Column(type="string", length=255, nullable=true)
      */
@@ -62,6 +56,11 @@ class TimelineItem
      * @Assert\Range(min = 1)
      */
     private $position;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $subtitle;
 
     /**
      * @return string
@@ -113,25 +112,6 @@ class TimelineItem
     public function setDescription(string $description): self
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * @return string|null
-     */
-    public function getDate(): ?string
-    {
-        return $this->date;
-    }
-
-    /**
-     * @param string $date
-     * @return $this
-     */
-    public function setDate(string $date): self
-    {
-        $this->date = $date;
 
         return $this;
     }
@@ -194,6 +174,18 @@ class TimelineItem
     public function setPosition(int $position): self
     {
         $this->position = $position;
+
+        return $this;
+    }
+
+    public function getSubtitle(): ?string
+    {
+        return $this->subtitle;
+    }
+
+    public function setSubtitle(?string $subtitle): self
+    {
+        $this->subtitle = $subtitle;
 
         return $this;
     }

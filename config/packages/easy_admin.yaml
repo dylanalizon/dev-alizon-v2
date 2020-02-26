@@ -2,17 +2,19 @@ easy_admin:
     entities:
         TimelineItem:
             class: 'App\Entity\TimelineItem'
+            controller: 'App\Controller\Admin\TimelineItemController'
             list:
                 fields:
                     - { property: 'position' }
                     - { property: 'title' }
-                    - { property: 'date' }
-                    - { property: 'image', template: 'admin/field_image.html.twig' }
+                    - { property: 'subtitle' }
+                    - { property: 'image', template: 'admin/timeline_item/field_image.html.twig' }
+                sort: ['position', 'ASC']
             form:
                 fields:
                     - { property: 'position' }
                     - { property: 'title' }
-                    - { property: 'date' }
+                    - { property: 'subtitle' }
                     - { property: 'imageFile', type: 'file' }
                     - { property: 'description', type: 'fos_ckeditor' }
     translation_domain: 'admin'

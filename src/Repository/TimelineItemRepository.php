@@ -29,12 +29,16 @@ class TimelineItemRepository extends ServiceEntityRepository
     public function findPositionData(): ?array
     {
         $result = $this->createQueryBuilder('timeline_item')
-            ->select('timeline_item.id as max_id, timeline_item.position as max_position')
+            ->select('timeline_item.id as id_max, timeline_item.position as position_max')
             ->orderBy('timeline_item.position', 'DESC')
             ->setMaxResults(1)
             ->getQuery()
             ->getOneOrNullResult(AbstractQuery::HYDRATE_ARRAY)
         ;
+
+        if (null === $result) {
+            $result = ['position_max' => 1, 'id_max' => null];
+        }
 
         return $result;
     }

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Repository\TimelineItemRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -18,9 +19,13 @@ class PageController extends AbstractController
 
     /**
      * @Route("/mon-parcours", name="career")
+     * @param TimelineItemRepository $repository
+     * @return Response
      */
-    public function career(): Response
+    public function career(TimelineItemRepository $repository): Response
     {
-        return $this->render('page/career.html.twig');
+        $items = $repository->findBy([], ['position' => 'DESC']);
+        dump($items);
+        return $this->render('page/career.html.twig', ['items' => $items]);
     }
 }

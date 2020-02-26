@@ -6,6 +6,29 @@
 
 {% block body_content %}
     <section class="container mx-auto py-16">
-        <p>Test</p>
+        <div class="timeline">
+            <div class="timeline__wrapper">
+
+                <div class="timeline__marker"></div>
+
+                {% for key, item in items %}
+                    <div class="timeline__item {{ key is odd ? 'timeline__item--right' : 'timeline__item--left' }}">
+                        <div class="timeline__item-circle">
+                            <div></div>
+                        </div>
+                        <div class="timeline__item-head">
+                            <h2>{{ item.title }} {% if item.subtitle %}<span class="small">{{ item.subtitle }}</span>{% endif %}</h2>
+                        </div>
+                        <div class="timeline__item-body">
+                            <div>{{ item.description|raw }}</div>
+                            {% if item.image %}
+                                <img src="{{ '/resize/timeline_item' ~ vich_uploader_asset(item, 'imageFile') }}" alt="{{ item.title }}" class="w-full mt-4">
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+
+            </div>
+        </div>
     </section>
 {% endblock %}

@@ -1,0 +1,21 @@
+paths:
+  - /:preset/uploads/images/:image(.*)
+sources:
+  - volume:
+      root: /mnt/images/uploads/:image
+presets:
+  jpg:
+    steps:
+      - $format:
+          type: jpeg
+      - $compress:
+          quality: 90
+  timeline_item:
+    steps:
+      - $fill:
+          width: 550
+          height: 280
+      - $format:
+          type: jpeg
+      - $compress:
+          quality: 90

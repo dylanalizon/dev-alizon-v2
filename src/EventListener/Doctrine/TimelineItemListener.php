@@ -1,6 +1,6 @@
 <?php
 
-namespace App\EventListener;
+namespace App\EventListener\Doctrine;
 
 use Doctrine\Common\Persistence\Event\LifecycleEventArgs;
 use App\Entity\TimelineItem;
@@ -44,8 +44,8 @@ class TimelineItemListener
             return;
         }
 
-        $nextPosition = $positionData['max_position'];
-        if ($positionData['max_id'] !== $entity->getId()) {
+        $nextPosition = $positionData['position_max'];
+        if ($positionData['id_max'] !== $entity->getId()) {
             ++$nextPosition;
         }
 
@@ -83,8 +83,8 @@ class TimelineItemListener
         $repository = $this->em->getRepository(TimelineItem::class);
         $positionData = $repository->findPositionData();
 
-        if ($entity->getPosition() > $positionData['max_position']) {
-            $entity->setPosition($positionData['max_position']);
+        if ($entity->getPosition() > $positionData['position_max']) {
+            $entity->setPosition($positionData['position_max']);
         }
 
         $repository->updatePositionsFromOldAndNew($positionOld, $entity->getPosition());

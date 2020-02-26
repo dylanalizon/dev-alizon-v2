@@ -118,3 +118,12 @@ services:
         - "3306:3306"
       networks:
         - backend
+
+### SpaceChop
+    spacechop:
+      image: spacechop/spacechop:latest
+      volumes:
+        - ./docker/spacechop/spacechop.yml:/config.yml
+        - ./public/uploads/images:/mnt/images/uploads
+      networks:
+        - backend

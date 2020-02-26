@@ -1,0 +1,3 @@
+{% if item.image %}
+    <img src="{{ '/resize/timeline_item' ~ vich_uploader_asset(item, 'imageFile') }}" style="max-height: 100px;">
+{% endif %}
