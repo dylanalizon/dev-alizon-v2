@@ -1,5 +1,5 @@
 imports:
-    - { resource: admin/ }
+    - { resource: ../admin/ }
 easy_admin:
     translation_domain: 'admin'
     list:
@@ -15,11 +15,12 @@ easy_admin:
             - { name: 'delete', css_class: 'btn btn-danger btn-bold', icon: 'flaticon2-trash' }
     design:
         menu:
+            - { route: 'admin_dashboard', label: 'menu.dashboard', icon: 'th-large', default: true }
             - { route: 'home', label: 'menu.back_to_site', icon: 'home' }
             - { label: 'menu.admin' }
             - { entity: 'TimelineItem', label: 'menu.timeline_item', icon: 'history' }
             - { label: 'menu.gallery' }
-            - { entity: 'Image', label: 'menu.image', icon: 'images' }
+            - { route: 'admin_image_index', label: 'menu.image', icon: 'images' }
         assets:
             favicon: '/favicon.png'
         form_theme: ['@EasyAdmin/form/bootstrap_4.html.twig', '@FOSCKEditor/Form/ckeditor_widget.html.twig', 'admin/form_theme.html.twig']

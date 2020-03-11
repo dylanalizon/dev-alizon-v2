@@ -210,3 +210,7 @@ $dropdown-link-active-bg:           				kt-brand-color() !default;
 $dropdown-link-disabled-color:      				kt-base-color(label, 1) !default;
 
 $dropdown-header-color:             				kt-base-color(label, 2) !default;
+
+
+// Body
+$body-color: kt-get($kt-font-color, text);

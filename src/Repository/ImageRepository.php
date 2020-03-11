@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Image;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
+use Doctrine\ORM\QueryBuilder;
 
 /**
  * @method Image|null find($id, $lockMode = null, $lockVersion = null)
@@ -19,32 +20,23 @@ class ImageRepository extends ServiceEntityRepository
         parent::__construct($registry, Image::class);
     }
 
-    // /**
-    //  * @return Image[] Returns an array of Image objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findYears(): array
     {
-        return $this->createQueryBuilder('i')
-            ->andWhere('i.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('i.id', 'ASC')
-            ->setMaxResults(10)
+        return $this->createQueryBuilder('image')
+            ->select('EXTRACT(YEAR FROM image.createdAt) as year, COUNT(image.id) as count')
+            ->groupBy('year')
+            ->orderBy('year', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+
+    public function findByYear(int $year): array
+    {
+        return $this->createQueryBuilder('image')
+            ->where('YEAR(image.createdAt) = :year')
+            ->setParameter('year', $year)
             ->getQuery()
             ->getResult()
         ;
     }
-    */
-
-    /*
-    public function findOneBySomeField($value): ?Image
-    {
-        return $this->createQueryBuilder('i')
-            ->andWhere('i.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }

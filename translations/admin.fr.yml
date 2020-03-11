@@ -4,6 +4,7 @@ menu:
   timeline_item: 'Timeline'
   gallery: 'Gallerie'
   image: 'Image'
+  dashboard: 'Dashboard'
 user:
   sign_out: 'Se déconnecter'
 action:
@@ -16,6 +17,14 @@ action:
   cancel: 'Annuler'
 paginator:
   results: '{0} Aucun résultat|{1} <strong>1</strong> résultat|]1,Inf] <strong>%count%</strong> résultats'
+image:
+  list:
+    title: 'Gallerie d''images'
+  error:
+    create: 'Erreur pendant l''upload de l''image.'
+dashboard:
+  title: 'Dashboard'
+
 
 ID: '#'
 # TimelineItem

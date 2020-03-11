@@ -1,5 +1,10 @@
 import './plugin';
 import '../css/style.scss';
+import Vue from 'vue';
+
+// Vue components
+import ImageManager from './components/ImageManager';
+Vue.component('image-manager', ImageManager);
 
 window.KTUtil = require("./global/components/base/util");
 window.KTApp = require("./global/components/base/app");
@@ -23,3 +28,9 @@ require("./global/layout/demo-panel");
 require("./global/layout/offcanvas-panel");
 require("./global/layout/quick-panel");
 require("./global/layout/quick-search");
+
+if (document.querySelector('#components')) {
+  new Vue({
+    el: '#components'
+  });
+}

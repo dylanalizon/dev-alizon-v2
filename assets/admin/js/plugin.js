@@ -14,6 +14,9 @@ require("jquery-form");
 // Toastr
 require("toastr/build/toastr.css");
 window.toastr = require("toastr");
+toastr.options = {
+  "positionClass": "toast-bottom-right"
+};
 
 // Tooltips
 import Tooltip from "tooltip.js";

@@ -1,4 +1,7 @@
 {
+    "beberlei/doctrineextensions": {
+        "version": "v1.2.6"
+    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
@@ -120,6 +123,12 @@
     },
     "jms/metadata": {
         "version": "2.1.0"
+    },
+    "knplabs/knp-components": {
+        "version": "v2.3.3"
+    },
+    "knplabs/knp-paginator-bundle": {
+        "version": "v5.1.1"
     },
     "laminas/laminas-code": {
         "version": "3.4.1"
