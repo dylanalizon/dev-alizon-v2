@@ -22,7 +22,7 @@
                         <div class="timeline__item-body">
                             <div>{{ item.description|raw }}</div>
                             {% if item.image %}
-                                <img src="{{ '/resize/timeline_item' ~ vich_uploader_asset(item, 'imageFile') }}" alt="{{ item.title }}" class="w-full mt-4">
+                                <img src="{{ '/resize/sm' ~ vich_uploader_asset(item.image, 'file') }}" alt="{{ item.title }}" class="w-full mt-4">
                             {% endif %}
                         </div>
                     </div>
