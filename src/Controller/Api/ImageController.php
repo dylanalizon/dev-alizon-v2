@@ -5,6 +5,7 @@ namespace App\Controller\Api;
 use App\Entity\Image;
 use App\Form\Api\ImageType;
 use App\Repository\ImageRepository;
+use App\Service\ImageManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -34,6 +35,19 @@ class ImageController extends AbstractController
     }
 
     /**
+     * @Route("/folders", name="api_image_folders", methods={"GET"})
+     *
+     * @param ImageManager $imageManager
+     * @return JsonResponse
+     */
+    public function folders(ImageManager $imageManager): JsonResponse
+    {
+        $folders = $imageManager->getFolders();
+
+        return $this->json($folders, Response::HTTP_OK);
+    }
+
+    /**
      * @Route("", name="api_image_create", methods={"POST"})
      *
      * @param Request                $request
@@ -53,7 +67,7 @@ class ImageController extends AbstractController
             $em->persist($image);
             $em->flush();
 
-            return $this->json($image, Response::HTTP_OK, [], ['groups' => 'image:read']);
+            return $this->json($image, Response::HTTP_CREATED, [], ['groups' => 'image:read']);
         }
 
         return $this->json([

@@ -5,11 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Image;
 use App\Repository\ImageRepository;
 use App\Service\ImageManager;
-use Doctrine\ORM\EntityManagerInterface;
-use Knp\Component\Pager\PaginatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Serializer\SerializerInterface;
@@ -35,19 +31,15 @@ class ImageController extends AbstractController
      * @Route("/admin/image", name="admin_image_index")
      *
      * @param ImageRepository     $imageRepository
-     * @param Request             $request
      * @param SerializerInterface $serializer
-     * @param PaginatorInterface  $paginator
      *
      * @return Response
      */
     public function index(
         ImageRepository $imageRepository,
-        Request $request,
-        SerializerInterface $serializer,
-        PaginatorInterface $paginator
+        SerializerInterface $serializer
     ): Response {
-        $folders = $this->imageManager->getFolders($request->query->all());
+        $folders = $this->imageManager->getFolders();
         $images = $imageRepository->findByYear($folders[0]['year']);
 
         return $this->render('admin/image/index.html.twig', [

@@ -28,56 +28,51 @@
       </div>
     </aside>
     <div
-      class="image-manager__content"
+      class="image-manager__content-container"
       :class="{'is-dragging': isDragging}"
       @dragenter="handleDragEnter"
       @dragleave="handleDragLeave"
       @drop="handleDrop"
       @dragover.prevent
     >
-      <div v-if="loading" class="loading">
-        <div class="dots">
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-          <div></div>
-        </div>
+      <div class="image-manager__content">
+        <Loader :loading="loading"/>
+        <table>
+          <thead>
+          <tr>
+            <th>Image</th>
+            <th>Nom</th>
+            <th>Taille</th>
+            <th>Actions</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr v-for="image in currentImages" :key="image.id">
+            <td><img :src="image.url"></td>
+            <td>{{ image.name }}</td>
+            <td>{{ image.size }}</td>
+            <td>
+              <button class="btn btn-outline-hover-brand btn-sm btn-icon" @click="deleteImage(image.id)">
+                <i class="fas fa-trash"></i>
+              </button>
+            </td>
+          </tr>
+          </tbody>
+        </table>
       </div>
-      <table>
-        <thead>
-        <tr>
-          <th>Image</th>
-          <th>Nom</th>
-          <th>Taille</th>
-          <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr v-for="image in currentImages" :key="image.id">
-          <td><img :src="image.url"></td>
-          <td>{{ image.name }}</td>
-          <td>{{ image.size }}</td>
-          <td>
-            <button class="btn btn-outline-hover-brand btn-sm btn-icon" @click="deleteImage(image.id)">
-              <i class="fas fa-trash"></i>
-            </button>
-          </td>
-        </tr>
-        </tbody>
-      </table>
     </div>
   </div>
 </template>
 
 <script>
   import axios from 'axios';
+  import Loader from './Loader';
 
   export default {
     name: 'image-manager',
+    components: {
+      Loader
+    },
     props: {
       currentYear: String,
       folders: Array,
@@ -114,7 +109,8 @@
           currentFolder.children = currentFolder.children.filter(image => image.id !== imageId);
           currentFolder.count = currentFolder.count - 1;
           this.imageFolders = folders;
-          if (!currentFolder.count) {
+          const currentYear = new Date().getFullYear();
+          if (!currentFolder.count && currentYear !== Number(this.currentFolder)) {
             delete this.imageFolders[this.currentFolder];
             this.changeFolder(this.sortedFolders[0] || null);
           }
@@ -124,6 +120,7 @@
 
       async changeFolder(folder) {
         if (!folder) {
+          this.currentFolder = folder;
           return;
         }
         if (!this.imageFolders[folder].children.length) {
@@ -182,20 +179,21 @@
             }
           }).catch(error => {
             if (error.response.data && error.response.data.message) {
+              this.loading = false;
               toastr.error(error.response.data.message);
             }
           });
         });
       }
     },
-    created() {
+    async created() {
       this.imageFolders = this.folders.reduce((acc, folder) => {
         acc[folder.year] = {
           count: folder.count,
           children: []
         };
 
-        if (folder.year === this.currentYear) {
+        if (folder.year === this.currentFolder) {
           acc[folder.year].children = JSON.parse(JSON.stringify(this.images));
         }
 
@@ -211,16 +209,43 @@
 
   .image-manager {
     display: flex;
+    height: 500px;
+    overflow: hidden;
+
+    @media screen and (max-width: 425px) {
+      flex-direction: column;
+    }
 
     .image-manager__aside {
       width: 300px;
-      margin-right: 30px;
       padding: 20px;
-      box-shadow: 0 0 13px 0 rgba(82,63,105,.1);
       display: flex;
       flex-direction: column;
       background-color: #fff;
-      border-radius: 4px;
+      border-right: 1px solid #ebedf2;
+      overflow-y: auto;
+
+      &::-webkit-scrollbar {
+        width: 7px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: #F7FAFB;
+        padding: 1px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: rgba($color-primary, .7);
+        border-radius: 4px;
+
+        &:hover {
+          background: rgba($color-primary, 1);
+        }
+      }
+
+      @media screen and (max-width: 425px) {
+        width: 100%;
+      }
 
       .image-manager__aside-search {
 
@@ -255,15 +280,18 @@
       }
     }
 
-    .image-manager__content {
+    .image-manager__content-container {
       position: relative;
       flex-grow: 1;
-      box-shadow: 0 0 13px 0 rgba(82,63,105,.1);
       background-color: #fff;
-      border-radius: 4px;
-      padding: 20px;
       display: flex;
       flex-direction: column;
+
+      @media screen and (max-width: 425px) {
+        margin-top: 1rem;
+        width: 100%;
+        overflow-x: auto;
+      }
       
       &.is-dragging:after {
         content: '';
@@ -275,156 +303,67 @@
         background: rgba($color-primary, .6);
       }
 
-      table {
-        width: 100%;
+      .image-manager__content {
+        overflow-y: auto;
+        padding: 20px;
 
-        th {
-          text-align: left;
-          padding-bottom: 1rem;
+        &::-webkit-scrollbar {
+          width: 7px;
+        }
 
-          &:first-child {
-            width: 250px;
-          }
-          &:last-child {
-            text-align: right;
+        &::-webkit-scrollbar-track {
+          background: #F7FAFB;
+          padding: 1px;
+        }
+
+        &::-webkit-scrollbar-thumb {
+          background: rgba($color-primary, .7);
+          border-radius: 4px;
+
+          &:hover {
+            background: rgba($color-primary, 1);
           }
         }
 
-        tbody {
+        table {
+          width: 100%;
 
-          tr {
+          th {
+            text-align: left;
+            padding-bottom: 1rem;
 
-            td {
-              padding: 1rem 1rem 1rem 0;
+            &:first-child {
+              width: 250px;
+            }
+            &:last-child {
+              text-align: right;
+            }
+          }
 
-              &:last-child {
-                text-align: right;
-              }
+          tbody {
 
-              img {
-                object-fit: cover;
-                width: 250px;
-                height: 100px;
-                box-shadow: 0 1px 4px rgba(16, 43, 107, 0.6);
-                border-radius: 6px;
+            tr {
+
+              td {
+                padding: 1rem 1rem 1rem 0;
+
+                &:last-child {
+                  text-align: right;
+                }
+
+                img {
+                  object-fit: cover;
+                  width: 250px;
+                  height: 100px;
+                  box-shadow: 0 1px 4px rgba(16, 43, 107, 0.6);
+                  border-radius: 6px;
+                }
               }
             }
           }
         }
       }
 
-      .kt-pagination {
-        align-self: center;
-      }
-    }
-  }
-
-  .loading {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0,0,0, .1);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    .dots {
-      display: inline-block;
-      position: relative;
-      width: 80px;
-      height: 80px;
-
-      div {
-        animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-        transform-origin: 40px 40px;
-
-        &:after {
-          content: " ";
-          display: block;
-          position: absolute;
-          width: 7px;
-          height: 7px;
-          border-radius: 50%;
-          background: $color-primary;
-          margin: -4px 0 0 -4px;
-        }
-
-        &:nth-child(1) {
-          animation-delay: -0.036s;
-
-          &:after {
-            top: 63px;
-            left: 63px;
-          }
-        }
-
-        &:nth-child(2) {
-          animation-delay: -0.072s;
-
-          &:after {
-            top: 68px;
-            left: 56px;
-          }
-        }
-        &:nth-child(3) {
-          animation-delay: -0.108s;
-
-          &:after {
-            top: 71px;
-            left: 48px;
-          }
-        }
-        &:nth-child(4) {
-          animation-delay: -0.144s;
-
-          &:after {
-            top: 72px;
-            left: 40px;
-          }
-        }
-        &:nth-child(5) {
-          animation-delay: -0.18s;
-
-          &:after {
-            top: 71px;
-            left: 32px;
-          }
-        }
-        &:nth-child(6) {
-          animation-delay: -0.216s;
-
-          &:after {
-            top: 68px;
-            left: 24px;
-          }
-        }
-        &:nth-child(7) {
-          animation-delay: -0.252s;
-
-          &:after {
-            top: 63px;
-            left: 17px;
-          }
-        }
-        &:nth-child(8) {
-          animation-delay: -0.288s;
-
-          &:after {
-            top: 56px;
-            left: 12px;
-          }
-        }
-      }
-    }
-  }
-  @keyframes lds-roller {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
     }
   }
 </style>

@@ -4,7 +4,7 @@ import Vue from 'vue';
 
 // Vue components
 import ImageManager from './components/ImageManager';
-Vue.component('image-manager', ImageManager);
+import InputImageManager from './components/InputImageManager';
 
 window.KTUtil = require("./global/components/base/util");
 window.KTApp = require("./global/components/base/app");
@@ -29,8 +29,20 @@ require("./global/layout/offcanvas-panel");
 require("./global/layout/quick-panel");
 require("./global/layout/quick-search");
 
-if (document.querySelector('#components')) {
+if (document.querySelector('#image-manager')) {
   new Vue({
-    el: '#components'
+    el: '#image-manager',
+    components: {
+      ImageManager
+    }
+  });
+}
+
+if (document.querySelector('#input-image-manager')) {
+  new Vue({
+    el: '#input-image-manager',
+    components: {
+      InputImageManager
+    }
   });
 }

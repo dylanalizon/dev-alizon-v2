@@ -22,7 +22,7 @@ class ImageManager
         $this->repository = $repository;
     }
 
-    public function getFolders(array $urlParams): array
+    public function getFolders(): array
     {
         $folders = $this->repository->findYears();
         if (empty($folders)) {
