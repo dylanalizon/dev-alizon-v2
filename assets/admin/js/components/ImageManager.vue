@@ -1,7 +1,7 @@
 <template>
   <div class="image-manager">
     <aside class="image-manager__aside">
-      <div class="image-manager__aside-search">
+      <div v-if="false" class="image-manager__aside-search">
         <div class="form-group">
           <label for="image-manager-search">Rechercher</label>
           <input type="text" class="form-control" id="image-manager-search">
@@ -35,7 +35,7 @@
       @drop="handleDrop"
       @dragover.prevent
     >
-      <div class="image-manager__content">
+      <div class="image-manager__content" :class="{'with-choice': withChoice}">
         <Loader :loading="loading"/>
         <table>
           <thead>
@@ -47,12 +47,12 @@
           </tr>
           </thead>
           <tbody>
-          <tr v-for="image in currentImages" :key="image.id">
+          <tr v-for="image in currentImages" :key="image.id" @dblclick="choiceImage(image, $event)">
             <td><img :src="image.url"></td>
             <td>{{ image.name }}</td>
             <td>{{ image.size }}</td>
             <td>
-              <button class="btn btn-outline-hover-brand btn-sm btn-icon" @click="deleteImage(image.id)">
+              <button type="button" class="btn btn-outline-hover-brand btn-sm btn-icon" @click="deleteImage(image.id)">
                 <i class="fas fa-trash"></i>
               </button>
             </td>
@@ -76,7 +76,12 @@
     props: {
       currentYear: String,
       folders: Array,
-      images: Array
+      images: Array,
+      withChoice: {
+        type: Boolean,
+        required: false,
+        default: false
+      }
     },
     data() {
       return {
@@ -184,6 +189,15 @@
             }
           });
         });
+      },
+
+      choiceImage(image, event) {
+        event.preventDefault();
+        if (!this.withChoice) {
+          return;
+        }
+
+        this.$emit('input', image.id, image.url);
       }
     },
     async created() {
@@ -262,7 +276,6 @@
         }
       }
       .image-manager__aside-explorer {
-        padding: 2rem 0;
 
         .image-manager__aside-explorer-title {
           font-size: 1.1rem;
@@ -325,6 +338,17 @@
           }
         }
 
+        &.with-choice {
+          tr {
+            cursor: pointer;
+            user-select: none;
+
+            &:hover {
+              background: rgba($color-primary, .2);
+            }
+          }
+        }
+
         table {
           width: 100%;
 
@@ -346,6 +370,10 @@
 
               td {
                 padding: 1rem 1rem 1rem 0;
+
+                &:first-child {
+                  padding: 1rem;
+                }
 
                 &:last-child {
                   text-align: right;

@@ -46,6 +46,11 @@ class TimelineItem
     private $subtitle;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Image")
+     */
+    private $image;
+
+    /**
      * @return string
      */
     public function __toString()
@@ -129,6 +134,18 @@ class TimelineItem
     public function setSubtitle(?string $subtitle): self
     {
         $this->subtitle = $subtitle;
+
+        return $this;
+    }
+
+    public function getImage(): ?Image
+    {
+        return $this->image;
+    }
+
+    public function setImage(?Image $image): self
+    {
+        $this->image = $image;
 
         return $this;
     }

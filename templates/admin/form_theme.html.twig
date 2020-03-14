@@ -13,3 +13,23 @@
         </span>
     {%- endif %}
 {%- endblock form_errors %}
+
+{% block image_row %}
+    <div class="form-group ">
+        {{ form_label(form) }}
+        <div class="form-widget">
+            {{ form_widget(form )}}
+            {{- form_errors(form) -}}
+        </div>
+    </div>
+{% endblock %}
+
+{% block image_widget %}
+    <div id="input-image-manager">
+        <input-image-manager
+                data-name="{{ full_name }}"
+                {% if value is not empty %}:data-value="{{ value }}" {% endif %}
+                {% if url is defined %}data-url="{{ url }}"{% endif %}
+        />
+    </div>
+{% endblock %}

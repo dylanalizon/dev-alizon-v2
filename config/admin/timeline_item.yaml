@@ -15,3 +15,4 @@ easy_admin:
           - { property: 'title' }
           - { property: 'subtitle' }
           - { property: 'description', type: 'fos_ckeditor' }
+          - { property: 'image', type: 'App\Form\Type\ImageType' }

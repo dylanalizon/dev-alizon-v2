@@ -21,10 +21,7 @@
         {% endfor %}
     {% endblock head_custom_stylesheets %}
 
-    {% block head_favicon %}
-        {% set favicon = easyadmin_config('design.assets.favicon') %}
-        <link rel="icon" type="{{ favicon.mime_type }}" href="{{ asset(favicon.path) }}" />
-    {% endblock %}
+    <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
 
     {% block head_javascript %}
     {% endblock head_javascript %}
