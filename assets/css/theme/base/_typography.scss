@@ -174,9 +174,17 @@
 		a {
 			@if $p == $highlight {
 				color: _palette($p, fg-bold);
+
+				&:hover {
+					color: darken(_palette($p, fg-bold), 10%);
+				}
 			}
 			@else {
 				color: _palette(accent1, bg);
+
+				&:hover {
+					color: darken(_palette(accent1, bg), 10%);
+				}
 			}
 		}
 

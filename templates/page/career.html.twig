@@ -6,6 +6,13 @@
 
 {% block body_content %}
     <section class="container mx-auto py-16">
+        <div class="text-center mb-8">
+            {% if sort == 'desc' %}
+                <span class="pr-4 border-r-4 border-primary border-solid">Du plus récent au plus ancien</span><a href="{{ path('career', {sort: 'asc'}) }}" class="pl-4" data-turbolinks-scroll="false">Du plus ancien au plus récent</a>
+            {% else %}
+                <a href="{{ path('career', {sort: 'desc'}) }}" class="pr-4 border-r-4 border-primary border-solid" data-turbolinks-scroll="false">Du plus récent au plus ancien</a><span class="pl-4">Du plus ancien au plus récent</span>
+            {% endif %}
+        </div>
         <div class="timeline">
             <div class="timeline__wrapper">
 
