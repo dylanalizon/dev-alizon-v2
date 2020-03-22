@@ -7,6 +7,12 @@ header {
   }
 }
 
-#swagger-ui.api-platform .info .title {
-  color: $color-primary;
+#swagger-ui.api-platform {
+  .info .title {
+    color: $color-primary;
+  }
+
+  section.models {
+    display: none;
+  }
 }
