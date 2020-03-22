@@ -7,6 +7,7 @@ use App\Form\Api\ImageType;
 use App\Repository\ImageRepository;
 use App\Service\ImageManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Swagger\Annotations as SWG;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,16 +17,27 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @Route("/api/images")
+ * @SWG\Tag(name="Images")
  */
 class ImageController extends AbstractController
 {
     /**
-     * @Route("/year/{year}", name="api_image_list_by_year", methods={"GET"})
+     * List the images by year.
      *
-     * @param ImageRepository $imageRepository
-     * @param int             $year
+     * @Route("/year/{year}", methods={"GET"})
      *
-     * @return JsonResponse
+     * @SWG\Parameter(
+     *     name="year",
+     *     in="path",
+     *     type="integer",
+     *     description="The year"
+     * )
+     *
+     * @SWG\Response(
+     *     response=200,
+     *     description="Returns the images by year",
+     *     @SWG\Schema(type="array", @SWG\Items(type="object", ref="#/definitions/image"))
+     * )
      */
     public function list(ImageRepository $imageRepository, int $year): JsonResponse
     {
@@ -35,10 +47,15 @@ class ImageController extends AbstractController
     }
 
     /**
-     * @Route("/folders", name="api_image_folders", methods={"GET"})
+     * List the image folders.
      *
-     * @param ImageManager $imageManager
-     * @return JsonResponse
+     * @Route("/folders", methods={"GET"})
+     *
+     * @SWG\Response(
+     *     response=200,
+     *     description="Returns the folders",
+     *     @SWG\Schema(type="array", @SWG\Items(type="object", ref="#/definitions/folder"))
+     * )
      */
     public function folders(ImageManager $imageManager): JsonResponse
     {
@@ -48,13 +65,23 @@ class ImageController extends AbstractController
     }
 
     /**
-     * @Route("", name="api_image_create", methods={"POST"})
+     * Create an image.
      *
-     * @param Request                $request
-     * @param EntityManagerInterface $em
-     * @param TranslatorInterface    $translator
+     * @Route(methods={"POST"})
      *
-     * @return JsonResponse
+     * @SWG\Parameter(
+     *     name="file",
+     *     in="formData",
+     *     type="file",
+     *     description="The image",
+     *     required=true
+     * )
+     *
+     * @SWG\Response(
+     *     response=201,
+     *     description="Returns the image created",
+     *     @SWG\Schema(type="object", ref="#/definitions/image")
+     * )
      */
     public function create(Request $request, EntityManagerInterface $em, TranslatorInterface $translator): JsonResponse
     {
@@ -71,23 +98,32 @@ class ImageController extends AbstractController
         }
 
         return $this->json([
-            'message' => $translator->trans('image.error.create', [], 'admin'),
-        ], Response::HTTP_BAD_REQUEST);
+            'message' => $translator->trans('image.error.create', [], 'api'),
+        ], Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
     /**
-     * @Route("/{id}", name="api_image_delete", methods={"DELETE"})
+     * Delete an image.
      *
-     * @param Image                  $image
-     * @param EntityManagerInterface $em
+     * @Route("/{id}", methods={"DELETE"})
      *
-     * @return JsonResponse
+     * @SWG\Parameter(
+     *     name="id",
+     *     in="path",
+     *     type="integer",
+     *     description="The image id"
+     * )
+     *
+     * @SWG\Response(
+     *     response=204,
+     *     description="Returned when successful",
+     * )
      */
     public function delete(Image $image, EntityManagerInterface $em): JsonResponse
     {
         $em->remove($image);
         $em->flush();
 
-        return $this->json([]);
+        return $this->json([], Response::HTTP_NO_CONTENT);
     }
 }

@@ -1,0 +1,13 @@
+easy_admin:
+  entities:
+    Skill:
+      class: 'App\Entity\Skill'
+      list:
+        fields:
+          - { property: 'name' }
+          - { property: 'description' }
+      form:
+        fields:
+          - { property: 'name' }
+          - { property: 'description' }
+          - { property: 'image', type: 'App\Form\Type\ImageType' }

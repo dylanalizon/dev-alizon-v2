@@ -1,0 +1,14 @@
+App\Entity\TimelineItem:
+  attributes:
+    id:
+      groups: ['timeline_item:read']
+    title:
+      groups: ['timeline_item:read']
+    description:
+      groups: ['timeline_item:read']
+    position:
+      groups: ['timeline_item:read']
+    subtitle:
+      groups: ['timeline_item:read']
+    image:
+      groups: ['timeline_item:read']

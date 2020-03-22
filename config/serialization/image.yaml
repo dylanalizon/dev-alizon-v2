@@ -1,4 +1,4 @@
 App\Entity\Image:
   attributes:
     id:
-      groups: ['image:read']
+      groups: ['image:read', 'timeline_item:read']

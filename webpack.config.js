@@ -12,6 +12,7 @@ Encore
     .addEntry('app', './assets/js/app.js')
     .addEntry('admin', './assets/admin/js/admin.js')
     .addEntry('login', './assets/admin/js/login.js')
+    .addStyleEntry('api-doc', './assets/css/api-doc.scss')
     .enableVueLoader()
     .splitEntryChunks()
     .enableSingleRuntimeChunk()

@@ -1,0 +1,10 @@
+imports:
+    - { resource: ../api/ }
+nelmio_api_doc:
+    documentation:
+        info:
+            title: Dev-Alizon
+            version: ''
+    areas:
+        path_patterns:
+            - ^/api(?!/doc$)

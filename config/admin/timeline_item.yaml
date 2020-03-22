@@ -2,7 +2,8 @@ easy_admin:
   entities:
     TimelineItem:
       class: 'App\Entity\TimelineItem'
-      controller: 'App\Controller\Admin\TimelineItemController'
+      templates:
+        list: 'admin/timeline_item/list.html.twig'
       list:
         fields:
           - { property: 'position' }
@@ -11,7 +12,6 @@ easy_admin:
         sort: ['position', 'ASC']
       form:
         fields:
-          - { property: 'position' }
           - { property: 'title' }
           - { property: 'subtitle' }
           - { property: 'description', type: 'fos_ckeditor' }

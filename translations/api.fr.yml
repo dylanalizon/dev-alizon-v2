@@ -1,0 +1,6 @@
+image:
+    error:
+        create: 'Erreur pendant l''upload de l''image.'
+timeline_item:
+    error:
+        update: 'Erreur pendant la modification de la timeline.'

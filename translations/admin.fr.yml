@@ -5,6 +5,7 @@ menu:
   gallery: 'Gallerie'
   image: 'Image'
   dashboard: 'Dashboard'
+  skill: 'Compétences'
 user:
   sign_out: 'Se déconnecter'
 action:
@@ -38,3 +39,5 @@ Image: 'Image'
 Subtitle: 'Sous-titre'
 # Image
 File: 'Image'
+# Skill
+Name: 'Nom'

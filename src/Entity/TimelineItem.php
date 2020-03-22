@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
@@ -35,8 +36,9 @@ class TimelineItem
     private $description;
 
     /**
-     * @ORM\Column(type="smallint", unique=true)
-     * @Assert\Range(min = 1)
+     * @Gedmo\SortablePosition
+     * @ORM\Column(type="smallint")
+     * @Assert\Range(min = 0)
      */
     private $position;
 

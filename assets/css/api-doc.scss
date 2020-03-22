@@ -1,0 +1,12 @@
+@import "variables";
+
+header {
+
+  &::before, #logo img {
+    background-color: #1e1e2d;
+  }
+}
+
+#swagger-ui.api-platform .info .title {
+  color: $color-primary;
+}

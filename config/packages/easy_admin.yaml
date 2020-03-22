@@ -19,6 +19,7 @@ easy_admin:
             - { route: 'home', label: 'menu.back_to_site', icon: 'home' }
             - { label: 'menu.admin' }
             - { entity: 'TimelineItem', label: 'menu.timeline_item', icon: 'history' }
+            - { entity: 'Skill', label: 'menu.skill', icon: 'code' }
             - { label: 'menu.gallery' }
             - { route: 'admin_image_index', label: 'menu.image', icon: 'images' }
         assets:
