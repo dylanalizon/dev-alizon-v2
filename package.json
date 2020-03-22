@@ -103,6 +103,7 @@
         "raphael": "^2.2.7",
         "select2": "^4.0.8",
         "socicon": "^3.0.5",
+        "sortablejs": "^1.10.2",
         "sticky-js": "^1.2.0",
         "stream-exhaust": "^1.0.2",
         "summernote": "^0.8.12",

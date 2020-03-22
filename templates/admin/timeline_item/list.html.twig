@@ -1,5 +1,9 @@
 {% extends 'admin/list.html.twig' %}
+{% set _entity_config = easyadmin_entity(app.request.query.get('entity')) %}
+{% trans_default_domain _entity_config.translation_domain %}
+{% set _trans_parameters = { '%entity_name%': _entity_config.name|trans, '%entity_label%': _entity_config.label|trans } %}
 
+{% block table_class 'table-sortable' %}
 
 {% block table_body %}
     {% for item in paginator.currentPageResults %}
@@ -8,7 +12,7 @@
         {% else %}
             {# the empty string concatenation is needed when the primary key is an object (e.g. an Uuid object) #}
             {% set _item_id = '' ~ attribute(item, _entity_config.primary_key_field_name) %}
-            <tr data-id="{{ _item_id }}">
+            <tr data-id="{{ _item_id }}" class="sortable-item">
 
                 {% for field, metadata in _fields_visible_by_user %}
                     {% set isSortingField = metadata.property == app.request.get('sortField') %}
@@ -17,7 +21,7 @@
 
                     <td class="{{ isSortingField ? 'sorted' }} {{ metadata.dataType|lower }} {{ metadata.css_class }}" {{ easyadmin_config('design.rtl') ? 'dir="rtl"' }}>
                         {% if isPositionField %}
-                            <button type="button" class="btn btn-outline-hover-brand btn-sm btn-elevate btn-icon"><i class="fas fa-arrows-alt-v"></i></button>
+                            <button type="button" class="btn btn-sm btn-elevate btn-icon sortable-handler"><i class="fas fa-arrows-alt-v"></i></button>
                         {% else %}
                             {{ easyadmin_render_field_for_list_view(_entity_config.name, item, metadata) }}
                         {% endif %}

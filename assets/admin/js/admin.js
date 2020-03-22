@@ -1,6 +1,8 @@
 import './plugin';
 import '../css/style.scss';
 import Vue from 'vue';
+import Sortable from 'sortablejs';
+import axios  from 'axios';
 
 // Vue components
 import ImageManager from './components/ImageManager';
@@ -43,6 +45,28 @@ if (document.querySelector('#input-image-manager')) {
     el: '#input-image-manager',
     components: {
       InputImageManager
+    }
+  });
+}
+
+if (document.querySelector('.table-sortable')) {
+  console.log('sortable');
+  Sortable.create(document.querySelector('.table-sortable tbody'), {
+    draggable: '.sortable-item',
+    handle: '.sortable-handler',
+    animation: 150,
+    async onEnd(event) {
+      const position = event.newIndex;
+      const id = event.item.dataset.id;
+      try {
+        await axios.put(`/api/timeline_items/${id}`, {
+          position
+        });
+      } catch (e) {
+        if (e.response.data && e.response.data.message) {
+          toastr.error(e.response.data.message);
+        }
+      }
     }
   });
 }
