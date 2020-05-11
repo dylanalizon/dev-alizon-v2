@@ -110,7 +110,7 @@
         "tagify": "^0.1.1",
         "tailwindcss": "^1.2.0",
         "tether": "^1.4.3",
-        "tinymce": "^5.0.16",
+        "tinymce": "^5.2.2",
         "toastr": "^2.1.4",
         "tooltip.js": "^1.2.0",
         "turbolinks": "^5.2.0",
