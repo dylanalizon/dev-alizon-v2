@@ -32,15 +32,13 @@
 </template>
 
 <script>
-  import ImageManager from "./ImageManager";
-  import Loader from "./Loader";
   import axios from "axios";
 
   export default {
     name: 'input-image-manager',
     components: {
-      ImageManager,
-      Loader
+      ImageManager: () => import('./ImageManager'),
+      Loader: () => import('./Loader')
     },
     props: {
       dataName: {

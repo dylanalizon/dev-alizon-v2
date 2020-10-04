@@ -25,11 +25,9 @@
 {% endblock %}
 
 {% block image_widget %}
-    <div id="input-image-manager">
-        <input-image-manager
-                data-name="{{ full_name }}"
-                {% if value is not empty %}:data-value="{{ value }}" {% endif %}
-                {% if url is defined %}data-url="{{ url }}"{% endif %}
-        />
-    </div>
+    <input-image-manager
+            data-name="{{ full_name }}"
+            {% if value is not empty %}:data-value="{{ value }}" {% endif %}
+            {% if url is defined %}data-url="{{ url }}"{% endif %}
+    />
 {% endblock %}

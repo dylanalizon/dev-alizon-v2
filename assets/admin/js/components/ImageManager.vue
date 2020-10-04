@@ -13,7 +13,7 @@
         <div class="image-manager__aside-explorer-folders">
           <ul class="kt-nav">
             <li class="kt-nav__item" :class="year === currentFolder ? 'kt-nav__item--active' : ''" v-for="year in sortedFolders">
-              <a href="#" class="kt-nav__link" @click="changeFolder(year)">
+              <a href="#" class="kt-nav__link" @click.prevent="changeFolder(year)">
                 <i class="kt-nav__link-icon fa fa-folder-open"></i>
                 <span class="kt-nav__link-text">{{ year }}</span>
                 <span class="kt-nav__link-badge">
@@ -66,12 +66,11 @@
 
 <script>
   import axios from 'axios';
-  import Loader from './Loader';
 
   export default {
     name: 'image-manager',
     components: {
-      Loader
+      Loader: () => import('./Loader')
     },
     props: {
       currentYear: String,
@@ -104,11 +103,26 @@
         return this.imageFolders[this.currentFolder].children;
       }
     },
+    async created() {
+      this.imageFolders = this.folders.reduce((acc, folder) => {
+        acc[folder.year] = {
+          count: folder.count,
+          children: []
+        };
+
+        if (folder.year === this.currentFolder) {
+          acc[folder.year].children = JSON.parse(JSON.stringify(this.images));
+        }
+
+        return acc;
+
+      }, this.imageFolders);
+    },
     methods: {
       async deleteImage(imageId) {
         this.loading = true;
         const response = await axios.delete(`/api/images/${imageId}`);
-        if (response.status === 200) {
+        if (response.status === 204) {
           const folders = JSON.parse(JSON.stringify(this.imageFolders));
           const currentFolder = folders[this.currentFolder];
           currentFolder.children = currentFolder.children.filter(image => image.id !== imageId);
@@ -117,7 +131,7 @@
           const currentYear = new Date().getFullYear();
           if (!currentFolder.count && currentYear !== Number(this.currentFolder)) {
             delete this.imageFolders[this.currentFolder];
-            this.changeFolder(this.sortedFolders[0] || null);
+            await this.changeFolder(this.sortedFolders[0] || null);
           }
         }
         this.loading = false;
@@ -199,21 +213,6 @@
 
         this.$emit('input', image.id, image.url);
       }
-    },
-    async created() {
-      this.imageFolders = this.folders.reduce((acc, folder) => {
-        acc[folder.year] = {
-          count: folder.count,
-          children: []
-        };
-
-        if (folder.year === this.currentFolder) {
-          acc[folder.year].children = JSON.parse(JSON.stringify(this.images));
-        }
-
-        return acc;
-
-      }, this.imageFolders);
     }
   }
 </script>
