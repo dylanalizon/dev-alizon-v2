@@ -5,6 +5,7 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\SkillRepository")
@@ -34,6 +35,7 @@ class Skill
     private $description;
 
     /**
+     * @Gedmo\SortableGroup
      * @ORM\ManyToOne(targetEntity="App\Entity\Skill", inversedBy="children")
      */
     private $parent;
@@ -44,6 +46,7 @@ class Skill
     private $children;
 
     /**
+     * @Gedmo\SortablePosition
      * @ORM\Column(type="integer")
      */
     private $position;

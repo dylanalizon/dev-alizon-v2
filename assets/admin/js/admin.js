@@ -31,6 +31,7 @@ require("./global/layout/offcanvas-panel");
 require("./global/layout/quick-panel");
 require("./global/layout/quick-search");
 
+// Image Manager
 if (document.querySelector('#image-manager')) {
   new Vue({
     el: '#image-manager',
@@ -40,6 +41,7 @@ if (document.querySelector('#image-manager')) {
   });
 }
 
+// Input Image Manager
 if (document.querySelector('#input-image-manager')) {
   new Vue({
     el: '#input-image-manager',
@@ -49,14 +51,18 @@ if (document.querySelector('#input-image-manager')) {
   });
 }
 
+// Sortable table (TimelineItem)
 if (document.querySelector('.table-sortable')) {
-  console.log('sortable');
   Sortable.create(document.querySelector('.table-sortable tbody'), {
     draggable: '.sortable-item',
     handle: '.sortable-handler',
     animation: 150,
     async onEnd(event) {
       const position = event.newIndex;
+      const oldPosition = event.oldIndex;
+      if (position === oldPosition) {
+        return;
+      }
       const id = event.item.dataset.id;
       try {
         await axios.put(`/api/timeline_items/${id}`, {
