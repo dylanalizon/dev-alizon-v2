@@ -1,6 +1,6 @@
 ARG SYMFODOCK_PHP_VERSION
 
-FROM laradock/workspace:2.6.1-${SYMFODOCK_PHP_VERSION}
+FROM laradock/workspace:latest-${SYMFODOCK_PHP_VERSION}
 
 LABEL maintainer="Dylan ALIZON <dylan.alizon@gmail.com>"
 
@@ -74,6 +74,9 @@ RUN echo "" >> ~/.bashrc && \
 ###########################################################################
 
 USER root
+
+# Upgrade composer
+RUN composer self-update --2
 
 # Add the composer.json
 COPY ./composer.json /home/symfodock/.composer/composer.json
