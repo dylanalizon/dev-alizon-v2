@@ -4,18 +4,17 @@ namespace App\Tests\Service;
 
 use App\Repository\ImageRepository;
 use App\Service\ImageManager;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
 class ImageManagerTest extends TestCase
 {
-    /** @var ImageRepository|PHPUnit_Framework_MockObject_MockObject */
-    private $imageRepository;
+    /** @var MockObject|ImageRepository */
+    private MockObject $imageRepository;
 
     protected function setUp(): void
     {
-        $this->imageRepository = $this->getMockBuilder(ImageRepository::class)
-            ->disableOriginalConstructor()
-            ->getMock();
+        $this->imageRepository = $this->createMock(ImageRepository::class);
     }
 
     public function testGetFolders(): void
@@ -46,7 +45,7 @@ class ImageManagerTest extends TestCase
     /**
      * @dataProvider provideSizes
      */
-    public function testDisplaySize($size, $expected): void
+    public function testDisplaySize(int $size, string $expected): void
     {
         $service = new ImageManager($this->imageRepository);
         $this->assertEquals($expected, $service->displaySize($size));

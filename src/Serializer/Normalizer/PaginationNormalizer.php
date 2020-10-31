@@ -2,8 +2,7 @@
 
 namespace App\Serializer\Normalizer;
 
-use Knp\Bundle\PaginatorBundle\Pagination\SlidingPagination;
-use Symfony\Component\HttpFoundation\Request;
+use Knp\Bundle\PaginatorBundle\Pagination\SlidingPaginationInterface;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Serializer\Normalizer\CacheableSupportsMethodInterface;
@@ -23,9 +22,9 @@ class PaginationNormalizer implements NormalizerInterface, CacheableSupportsMeth
     private $urlGenerator;
 
     /**
-     * @var Request
+     * @var RequestStack
      */
-    private $request;
+    private $requestStack;
 
     public function __construct(
         ObjectNormalizer $normalizer,
@@ -34,34 +33,34 @@ class PaginationNormalizer implements NormalizerInterface, CacheableSupportsMeth
     ) {
         $this->normalizer = $normalizer;
         $this->urlGenerator = $urlGenerator;
-        $this->request = $requestStack->getCurrentRequest();
+        $this->requestStack = $requestStack;
     }
 
     public function normalize($object, string $format = null, array $context = array()): array
     {
-        /** @var SlidingPagination $object */
+        /** @var SlidingPaginationInterface $object */
         $paginationData = $object->getPaginationData();
-
-        $route = $this->request->get('_route');
+        $request = $this->requestStack->getCurrentRequest();
+        $route = $request->get('_route');
         $currentData = [
             'value' => $paginationData['current'],
-            'url' => $this->urlGenerator->generate($route, array_merge($this->request->query->all(), ['page' => $paginationData['current']])),
+            'url' => $this->urlGenerator->generate($route, array_merge($request->query->all(), ['page' => $paginationData['current']])),
         ];
         $firstData = [
             'value' => $paginationData['first'],
-            'url' => $this->urlGenerator->generate($route, array_merge($this->request->query->all(), ['page' => $paginationData['first']])),
+            'url' => $this->urlGenerator->generate($route, array_merge($request->query->all(), ['page' => $paginationData['first']])),
         ];
         $lastData = [
             'value' => $paginationData['last'],
-            'url' => $this->urlGenerator->generate($route, array_merge($this->request->query->all(), ['page' => $paginationData['last']])),
+            'url' => $this->urlGenerator->generate($route, array_merge($request->query->all(), ['page' => $paginationData['last']])),
         ];
         $nextData = isset($paginationData['next']) ? [
             'value' => $paginationData['next'],
-            'url' => $this->urlGenerator->generate($route, array_merge($this->request->query->all(), ['page' => $paginationData['next']])),
+            'url' => $this->urlGenerator->generate($route, array_merge($request->query->all(), ['page' => $paginationData['next']])),
         ] : null;
         $previousData = isset($paginationData['previous']) ? [
             'value' => $paginationData['previous'],
-            'url' => $this->urlGenerator->generate($route, array_merge($this->request->query->all(), ['page' => $paginationData['previous']])),
+            'url' => $this->urlGenerator->generate($route, array_merge($request->query->all(), ['page' => $paginationData['previous']])),
         ] : null;
 
         return [
@@ -75,7 +74,7 @@ class PaginationNormalizer implements NormalizerInterface, CacheableSupportsMeth
 
     public function supportsNormalization($data, string $format = null): bool
     {
-        return $data instanceof SlidingPagination;
+        return $data instanceof SlidingPaginationInterface;
     }
 
     public function hasCacheableSupportsMethod(): bool
