@@ -6,13 +6,12 @@ use App\Command\UserCreateCommand;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use PHPUnit\Framework\MockObject\MockObject;
-use PHPUnit\Framework\TestCase;
+use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Application;
-use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Tester\CommandTester;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
-class UserCreateCommandTest extends TestCase
+class UserCreateCommandTest extends KernelTestCase
 {
     /** @var MockObject|UserPasswordEncoderInterface  */
     private MockObject $passwordEncoder;
@@ -46,28 +45,34 @@ class UserCreateCommandTest extends TestCase
 
     public function testInteract(): void
     {
-        $application = new Application();
-        /** @var MockObject|QuestionHelper $helper */
-        $helper = $this->createPartialMock(QuestionHelper::class, ['ask']);
-        $helper->expects($this->at(0))
-            ->method('ask')
-            ->willReturn('test@test.test');
-        $helper->expects($this->at(1))
-            ->method('ask')
-            ->willReturn('password');
-        $application->getHelperSet()->set($helper, 'question');
-
         $this->passwordEncoder
             ->expects($this->once())
             ->method('encodePassword')
-            ->with($this->isInstanceOf(User::class), $this->equalTo('password'))
+            ->with($this->isInstanceOf(User::class), $this->equalTo('passw0rd'))
             ->willReturn('');
 
-        $commandTester = $this->createCommandTester($application);
+        $commandTester = $this->createCommandTester();
+        $commandTester->setInputs(['test@test.test', 'passw0rd']);
         $result = $commandTester->execute([], ['interactive' => true]);
 
         $this->assertEquals(0, $result);
         $this->assertRegExp("/Created user test@test.test/", $commandTester->getDisplay());
+    }
+
+    public function testInteractWithEmptyEmail(): void
+    {
+        $commandTester = $this->createCommandTester();
+        $commandTester->setInputs(['']);
+        $this->expectException(\Exception::class);
+        $commandTester->execute([], ['interactive' => true]);
+    }
+
+    public function testInteractWithEmptyPassword(): void
+    {
+        $commandTester = $this->createCommandTester();
+        $commandTester->setInputs(['test@test.test', '']);
+        $this->expectException(\Exception::class);
+        $commandTester->execute([], ['interactive' => true]);
     }
 
     private function createCommandTester(Application $application = null): CommandTester
