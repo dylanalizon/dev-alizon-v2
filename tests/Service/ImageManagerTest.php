@@ -51,11 +51,9 @@ class ImageManagerTest extends TestCase
         $this->assertEquals($expected, $service->displaySize($size));
     }
 
-    public function provideSizes(): array
+    public function provideSizes(): \Generator
     {
-        return [
-            [1000, '1k'],
-            [10000000, '9.6M'],
-        ];
+        yield [1000, '1k'];
+        yield [10000000, '9.6M'];
     }
 }

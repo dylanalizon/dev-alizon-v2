@@ -85,131 +85,132 @@ class PaginationNormalizerTest extends TestCase
         $this->assertTrue($normalizer->hasCacheableSupportsMethod());
     }
 
-    public function providePaginations(): array
+    public function providePaginations(): \Generator
     {
-        return [
+        yield [
+            // Data
             [
-                // Data
-                [
-                    'current' => 1,
-                    'first' => 1,
-                    'last' => 1,
+                'current' => 1,
+                'first' => 1,
+                'last' => 1,
+            ],
+            // Count method calls
+            3,
+            // Expected
+            [
+                'current' => [
+                    'value' => 1,
+                    'url' => 'an url',
                 ],
-                // Count method calls
-                3,
-                // Expected
-                [
-                    'current' => [
-                        'value' => 1,
-                        'url' => 'an url',
-                    ],
-                    'first' => [
-                        'value' => 1,
-                        'url' => 'an url',
-                    ],
-                    'last' => [
-                        'value' => 1,
-                        'url' => 'an url',
-                    ],
-                    'next' => null,
-                    'previous' => null,
+                'first' => [
+                    'value' => 1,
+                    'url' => 'an url',
+                ],
+                'last' => [
+                    'value' => 1,
+                    'url' => 'an url',
+                ],
+                'next' => null,
+                'previous' => null,
+            ],
+        ];
+
+        yield [
+            // Data
+            [
+                'current' => 1,
+                'first' => 1,
+                'last' => 10,
+                'next' => 2,
+            ],
+            // Count method calls
+            4,
+            // Expected
+            [
+                'current' => [
+                    'value' => 1,
+                    'url' => 'an url',
+                ],
+                'first' => [
+                    'value' => 1,
+                    'url' => 'an url',
+                ],
+                'last' => [
+                    'value' => 10,
+                    'url' => 'an url',
+                ],
+                'next' => [
+                    'value' => 2,
+                    'url' => 'an url',
+                ],
+                'previous' => null,
+            ],
+        ];
+
+        yield [
+            // Data
+            [
+                'current' => 5,
+                'first' => 1,
+                'last' => 10,
+                'next' => 6,
+                'previous' => 4,
+            ],
+            // Count method calls
+            5,
+            // Expected
+            [
+                'current' => [
+                    'value' => 5,
+                    'url' => 'an url',
+                ],
+                'first' => [
+                    'value' => 1,
+                    'url' => 'an url',
+                ],
+                'last' => [
+                    'value' => 10,
+                    'url' => 'an url',
+                ],
+                'next' => [
+                    'value' => 6,
+                    'url' => 'an url',
+                ],
+                'previous' => [
+                    'value' => 4,
+                    'url' => 'an url',
                 ],
             ],
+        ];
+
+        yield [
+            // Data
             [
-                // Data
-                [
-                    'current' => 1,
-                    'first' => 1,
-                    'last' => 10,
-                    'next' => 2,
-                ],
-                // Count method calls
-                4,
-                // Expected
-                [
-                    'current' => [
-                        'value' => 1,
-                        'url' => 'an url',
-                    ],
-                    'first' => [
-                        'value' => 1,
-                        'url' => 'an url',
-                    ],
-                    'last' => [
-                        'value' => 10,
-                        'url' => 'an url',
-                    ],
-                    'next' => [
-                        'value' => 2,
-                        'url' => 'an url',
-                    ],
-                    'previous' => null,
-                ],
+                'current' => 10,
+                'first' => 1,
+                'last' => 10,
+                'previous' => 9,
             ],
+            // Count method calls
+            4,
+            // Expected
             [
-                // Data
-                [
-                    'current' => 5,
-                    'first' => 1,
-                    'last' => 10,
-                    'next' => 6,
-                    'previous' => 4,
+                'current' => [
+                    'value' => 10,
+                    'url' => 'an url',
                 ],
-                // Count method calls
-                5,
-                // Expected
-                [
-                    'current' => [
-                        'value' => 5,
-                        'url' => 'an url',
-                    ],
-                    'first' => [
-                        'value' => 1,
-                        'url' => 'an url',
-                    ],
-                    'last' => [
-                        'value' => 10,
-                        'url' => 'an url',
-                    ],
-                    'next' => [
-                        'value' => 6,
-                        'url' => 'an url',
-                    ],
-                    'previous' => [
-                        'value' => 4,
-                        'url' => 'an url',
-                    ],
+                'first' => [
+                    'value' => 1,
+                    'url' => 'an url',
                 ],
-            ],
-            [
-                // Data
-                [
-                    'current' => 10,
-                    'first' => 1,
-                    'last' => 10,
-                    'previous' => 9,
+                'last' => [
+                    'value' => 10,
+                    'url' => 'an url',
                 ],
-                // Count method calls
-                4,
-                // Expected
-                [
-                    'current' => [
-                        'value' => 10,
-                        'url' => 'an url',
-                    ],
-                    'first' => [
-                        'value' => 1,
-                        'url' => 'an url',
-                    ],
-                    'last' => [
-                        'value' => 10,
-                        'url' => 'an url',
-                    ],
-                    'next' => null,
-                    'previous' => [
-                        'value' => 9,
-                        'url' => 'an url',
-                    ],
+                'next' => null,
+                'previous' => [
+                    'value' => 9,
+                    'url' => 'an url',
                 ],
             ],
         ];

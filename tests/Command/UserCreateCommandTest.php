@@ -81,11 +81,9 @@ class UserCreateCommandTest extends TestCase
         return new CommandTester($application->find('app:user:create'));
     }
 
-    public function provideUsers(): array
+    public function provideUsers(): \Generator
     {
-        return [
-            [['email' => 'test@test.test', 'password' => 'password'], 0],
-            [['email' => 'test2@test2.test2', 'password' => 'password2', '--admin' => true], 0],
-        ];
+        yield [['email' => 'test@test.test', 'password' => 'password'], 0];
+        yield [['email' => 'test2@test2.test2', 'password' => 'password2', '--admin' => true], 0];
     }
 }
