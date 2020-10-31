@@ -16,6 +16,7 @@ services:
         context: ./docker/workspace
         args:
           - SYMFODOCK_PHP_VERSION=7.4
+          - INSTALL_XDEBUG=true
           - INSTALL_SSH2=false
           - INSTALL_AMQP=false
           - INSTALL_PHPREDIS=true
