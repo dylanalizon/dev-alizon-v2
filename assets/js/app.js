@@ -13,6 +13,7 @@ document.addEventListener("turbolinks:load", function() {
     $('body').removeClass('is-preload');
   }, 100);
 
+  // On scroll => change navbar
   $window.scroll(function() {
     if ($(document).scrollTop() > 50) {
       $('.header__nav').addClass('header__affix');
@@ -21,6 +22,7 @@ document.addEventListener("turbolinks:load", function() {
     }
   });
 
+  // on Hambergur menu click
   $('.header__navTrigger').click(function () {
     $(this).toggleClass('active');
     let $headerMainListDiv = $("#header__mainListDiv");

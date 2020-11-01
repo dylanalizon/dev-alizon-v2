@@ -1,6 +1,6 @@
 {% set routeName = app.request.get('_route') %}
 
-<header class="header">
+<header class="header{{ enableDarkHeader is defined ? ' header__dark' : ''}}">
     <nav class="header__nav">
         <div class="header__logo">
             <a href="{{ path('home') }}">

@@ -4,9 +4,9 @@
 @import "~tailwindcss/utilities";
 
 // General
-@import "theme/theme";
 @import "variables";
 @import "fonts";
+@import "theme/theme";
 
 // Components
 @import "components/button";
@@ -14,6 +14,7 @@
 @import "components/scrollbar";
 @import "components/progress-bar";
 @import "components/timeline";
+@import "components/inputs";
 
 // Layouts
 @import "layouts/navbar";
@@ -21,3 +22,4 @@
 
 // Pages
 @import "pages/homepage";
+@import "pages/login";

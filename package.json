@@ -1,11 +1,12 @@
 {
     "devDependencies": {
-        "@symfony/webpack-encore": "^0.28.2",
+        "@symfony/webpack-encore": "^0.31.0",
+        "autoprefixer": "^9.8.6",
         "core-js": "^3.0.0",
         "node-sass": "^4.13.1",
         "postcss-loader": "^3.0.0",
         "regenerator-runtime": "^0.13.2",
-        "sass-loader": "^7.0.1",
+        "sass-loader": "^9.0.1",
         "vue": "^2.6.11",
         "vue-loader": "^15.0.11",
         "vue-template-compiler": "^2.6.11",
@@ -21,7 +22,6 @@
     },
     "dependencies": {
         "@fortawesome/fontawesome-free": "^5.12.1",
-        "autoprefixer": "^9.7.4",
         "axios": "^0.21.0",
         "es6-promise": "^4.2.8",
         "es6-promise-polyfill": "^1.2.0",
@@ -31,9 +31,7 @@
         "turbolinks": "^5.2.0"
     },
     "browserslist": [
-        "> 0.5%",
-        "last 2 versions",
-        "Firefox ESR",
-        "not dead"
+        "> 1%",
+        "last 2 versions"
     ]
 }
