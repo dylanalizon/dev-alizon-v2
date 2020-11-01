@@ -25,7 +25,7 @@ services:
           - INSTALL_V8JS=false
           - INSTALL_WORKSPACE_SSH=false
           - INSTALL_SYMFONY=true
-          - INSTALL_PYTHON=false
+          - INSTALL_PYTHON=true
           - INSTALL_PG_CLIENT=false
           - INSTALL_MYSQL_CLIENT=false
           - INSTALL_PING=true
