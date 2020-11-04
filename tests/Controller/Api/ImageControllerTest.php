@@ -80,7 +80,12 @@ class ImageControllerTest extends WebTestCase
     public function testCreateWithoutFile(): void
     {
         $this->client->request('POST', '/api/images');
-        dd($this->client->getResponse());
+        $response = $this->client->getResponse();
+        $this->assertEquals(Response::HTTP_UNPROCESSABLE_ENTITY, $response->getStatusCode());
+        $content = json_decode($response->getContent(), true);
+        $this->assertIsArray($content);
+        $this->assertArrayHasKey('message', $content);
+        $this->assertEquals("Erreur pendant l'upload de l'image.", $content['message']);
     }
 
     public function testDelete(): void

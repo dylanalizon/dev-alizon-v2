@@ -31,6 +31,7 @@ class Image
      * @var File
      * @Vich\UploadableField(mapping="images", fileNameProperty="fileName", size="fileSize")
      * @Assert\Image()
+     * @Assert\NotNull
      */
     private $file;
 
