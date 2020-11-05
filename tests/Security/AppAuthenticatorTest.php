@@ -3,10 +3,13 @@
 namespace App\Tests\Security;
 
 use App\Entity\User;
+use App\Helper\StringHelper;
 use App\Repository\UserRepository;
+use App\Response\UnauthorizedJsonResponse;
 use App\Security\AppAuthenticator;
 use App\Tests\TestHelper;
 use Doctrine\ORM\EntityManagerInterface;
+use Generator;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpFoundation\ParameterBag;
@@ -42,8 +45,12 @@ class AppAuthenticatorTest extends TestCase
     /** @var TranslatorInterface|MockObject */
     private MockObject $translator;
 
+    /** @var MockObject|StringHelper */
+    private MockObject $stringHelper;
+
     /** @var AppAuthenticator */
     private AppAuthenticator $authenticator;
+
 
     protected function setUp(): void
     {
@@ -52,12 +59,14 @@ class AppAuthenticatorTest extends TestCase
         $this->csrfTokenManager = $this->createMock(CsrfTokenManagerInterface::class);
         $this->passwordEncoder = $this->createMock(UserPasswordEncoderInterface::class);
         $this->translator = $this->createMock(TranslatorInterface::class);
+        $this->stringHelper = $this->createMock(StringHelper::class);
         $this->authenticator = new AppAuthenticator(
             $this->entityManager,
             $this->urlGenerator,
             $this->csrfTokenManager,
             $this->passwordEncoder,
-            $this->translator
+            $this->translator,
+            $this->stringHelper
         );
     }
 
@@ -267,11 +276,79 @@ class AppAuthenticatorTest extends TestCase
         $this->invokeMethod($this->authenticator, 'getLoginUrl');
     }
 
-    public function provideTestSupports(): \Generator
+    /**
+     * @dataProvider provideTestStart
+     */
+    public function testStart(
+        bool $isXmlHttpRequest,
+        int $countCallGetAcceptableContentTypes,
+        array $getAcceptableContentTypes
+    ): void {
+        $requestMock = $this->createMock(Request::class);
+        $requestMock
+            ->expects($this->once())
+            ->method('isXmlHttpRequest')
+            ->willReturn($isXmlHttpRequest);
+        $requestMock
+            ->expects($this->exactly($countCallGetAcceptableContentTypes))
+            ->method('getAcceptableContentTypes')
+            ->willReturn($getAcceptableContentTypes);
+        $this->urlGenerator
+            ->expects($this->once())
+            ->method('generate')
+            ->with('app_login')
+            ->willReturn('a route');
+        $result = $this->authenticator->start($requestMock);
+        $this->assertInstanceOf(RedirectResponse::class, $result);
+        $this->assertEquals('a route', $result->getTargetUrl());
+    }
+
+    public function testStartWithJsonRequest(): void
+    {
+        $requestMock = $this->createMock(Request::class);
+        $requestMock
+            ->expects($this->once())
+            ->method('isXmlHttpRequest')
+            ->willReturn(false);
+        $requestMock
+            ->expects($this->once())
+            ->method('getAcceptableContentTypes')
+            ->willReturn(['application/json']);
+        $this->stringHelper
+            ->expects($this->once())
+            ->method('contains')
+            ->with('application/json', $this->isType('array'))
+            ->willReturn(true);
+        $result = $this->authenticator->start($requestMock);
+        $this->assertInstanceOf(UnauthorizedJsonResponse::class, $result);
+    }
+
+    public function testStartWithXmlHttpRequest(): void
+    {
+        $requestMock = $this->createMock(Request::class);
+        $requestMock
+            ->expects($this->once())
+            ->method('isXmlHttpRequest')
+            ->willReturn(true);
+        $requestMock
+            ->expects($this->once())
+            ->method('getAcceptableContentTypes')
+            ->willReturn([]);
+        $result = $this->authenticator->start($requestMock);
+        $this->assertInstanceOf(UnauthorizedJsonResponse::class, $result);
+    }
+
+    public function provideTestSupports(): Generator
     {
         yield ['app_login', true, true];
         yield ['test', true, false];
         yield ['test', false, false];
         yield ['app_login', false, false];
+    }
+
+    public function provideTestStart(): Generator
+    {
+        yield [false, 1, [], RedirectResponse::class];
+        yield [true, 2, ['text/html'], RedirectResponse::class];
     }
 }

@@ -12,7 +12,7 @@ class StringHelper
      *
      * @return bool
      */
-    public static function contains(string $haystack, $needles): bool
+    public function contains(string $haystack, $needles): bool
     {
         foreach ((array) $needles as $needle) {
             if ('' !== $needle && false !== mb_strpos($haystack, $needle)) {

@@ -34,19 +34,22 @@ class AppAuthenticator extends AbstractFormLoginAuthenticator implements Passwor
     private CsrfTokenManagerInterface $csrfTokenManager;
     private UserPasswordEncoderInterface $passwordEncoder;
     private TranslatorInterface $translator;
+    private StringHelper $stringHelper;
 
     public function __construct(
         EntityManagerInterface $entityManager,
         UrlGeneratorInterface $urlGenerator,
         CsrfTokenManagerInterface $csrfTokenManager,
         UserPasswordEncoderInterface $passwordEncoder,
-        TranslatorInterface $translator
+        TranslatorInterface $translator,
+        StringHelper $stringHelper
     ) {
         $this->entityManager = $entityManager;
         $this->urlGenerator = $urlGenerator;
         $this->csrfTokenManager = $csrfTokenManager;
         $this->passwordEncoder = $passwordEncoder;
         $this->translator = $translator;
+        $this->stringHelper = $stringHelper;
     }
 
     public function supports(Request $request)
@@ -126,9 +129,9 @@ class AppAuthenticator extends AbstractFormLoginAuthenticator implements Passwor
     {
         if (($request->isXmlHttpRequest() && $this->acceptsAnyContentType($request)) || $this->wantsJson($request)) {
             return new UnauthorizedJsonResponse();
-        } else {
-            return new RedirectResponse($this->getLoginUrl());
         }
+
+        return new RedirectResponse($this->getLoginUrl());
     }
 
     /**
@@ -150,6 +153,6 @@ class AppAuthenticator extends AbstractFormLoginAuthenticator implements Passwor
     {
         $acceptable = $request->getAcceptableContentTypes();
 
-        return isset($acceptable[0]) && StringHelper::contains($acceptable[0], ['/json', '+json']);
+        return isset($acceptable[0]) && $this->stringHelper->contains($acceptable[0], ['/json', '+json']);
     }
 }
