@@ -3,7 +3,6 @@
 namespace App\Service;
 
 use App\Repository\ImageRepository;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class ImageManager
 {
@@ -14,8 +13,6 @@ class ImageManager
 
     /**
      * ImageManager constructor.
-     *
-     * @param ImageRepository $repository
      */
     public function __construct(ImageRepository $repository)
     {

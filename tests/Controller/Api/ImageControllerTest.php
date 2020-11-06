@@ -41,7 +41,7 @@ class ImageControllerTest extends WebTestCase
 
     public function testFolders(): void
     {
-        $this->client->request('GET', "api/images/folders");
+        $this->client->request('GET', 'api/images/folders');
         $response = $this->client->getResponse();
         $this->assertEquals(Response::HTTP_OK, $response->getStatusCode());
         $content = json_decode($response->getContent(), true);
@@ -58,7 +58,7 @@ class ImageControllerTest extends WebTestCase
         imagejpeg(imagecreatetruecolor(10, 10), $image);
         $file = new UploadedFile($image, 'image_fixture.jpg');
         $this->client->request('POST', '/api/images', [], [
-           'file' => $file
+           'file' => $file,
         ]);
         $response = $this->client->getResponse();
         $this->assertEquals(Response::HTTP_CREATED, $response->getStatusCode());
@@ -74,7 +74,7 @@ class ImageControllerTest extends WebTestCase
         /** @var Image $image */
         $image = $imageRepository->find($content['id']);
         $this->assertInstanceOf(Image::class, $image);
-        unlink(static::$kernel->getProjectDir() . "/public/uploads/images/{$content['year']}/{$image->getFileName()}");
+        unlink(static::$kernel->getProjectDir()."/public/uploads/images/{$content['year']}/{$image->getFileName()}");
     }
 
     public function testCreateWithoutFile(): void

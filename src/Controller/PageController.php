@@ -20,11 +20,6 @@ class PageController extends AbstractController
 
     /**
      * @Route("/mon-parcours", name="career")
-     *
-     * @param Request                $request
-     * @param TimelineItemRepository $repository
-     *
-     * @return Response
      */
     public function career(Request $request, TimelineItemRepository $repository): Response
     {

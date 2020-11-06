@@ -15,9 +15,6 @@ class ValidationFailedApiException extends HttpException
         parent::__construct(Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
-    /**
-     * @return array
-     */
     public function getErrors(): array
     {
         return $this->errors;

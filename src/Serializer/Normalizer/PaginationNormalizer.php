@@ -36,7 +36,7 @@ class PaginationNormalizer implements NormalizerInterface, CacheableSupportsMeth
         $this->requestStack = $requestStack;
     }
 
-    public function normalize($object, string $format = null, array $context = array()): array
+    public function normalize($object, string $format = null, array $context = []): array
     {
         /** @var SlidingPaginationInterface $object */
         $paginationData = $object->getPaginationData();

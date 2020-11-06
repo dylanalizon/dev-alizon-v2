@@ -50,7 +50,6 @@ class User implements UserInterface
         return $this->email;
     }
 
-
     public function getId(): ?int
     {
         return $this->id;

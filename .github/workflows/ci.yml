@@ -54,6 +54,11 @@ jobs:
               run: |
                   composer install --no-progress --no-suggest --prefer-dist --optimize-autoloader
 
+            # -- PHP Lint ----------------------------------------------------------------------------------------------
+            - name: PHP linter
+              run: |
+                  php vendor/bin/php-cs-fixer fix --dry-run --using-cache=no --verbose
+
             # -- Install and build front -------------------------------------------------------------------------------
             - name: Install and build front
               run: |
