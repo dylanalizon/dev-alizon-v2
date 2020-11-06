@@ -98,22 +98,10 @@ class AppAuthenticatorTest extends TestCase
         $requestMock->request = $this->createMock(ParameterBag::class);
         $requestMock
             ->request
-            ->expects($this->at(0))
+            ->expects($this->exactly(3))
             ->method('get')
-            ->with('email')
-            ->willReturn($email);
-        $requestMock
-            ->request
-            ->expects($this->at(1))
-            ->method('get')
-            ->with('password')
-            ->willReturn($password);
-        $requestMock
-            ->request
-            ->expects($this->at(2))
-            ->method('get')
-            ->with('_csrf_token')
-            ->willReturn($csrfToken);
+            ->withConsecutive(['email'], ['password'], ['_csrf_token'])
+            ->willReturnOnConsecutiveCalls($email, $password, $csrfToken);
         $sessionMock = $this->createMock(SessionInterface::class);
         $requestMock
             ->expects($this->once())

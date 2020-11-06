@@ -42,7 +42,7 @@ class UserCreateCommandTest extends KernelTestCase
         $result = $commandTester->execute($userData);
 
         $this->assertEquals($expected, $result);
-        $this->assertRegExp("/Created user {$userData['email']}/", $commandTester->getDisplay());
+        $this->assertMatchesRegularExpression("/Created user {$userData['email']}/", $commandTester->getDisplay());
     }
 
     public function testInteract(): void
@@ -58,7 +58,7 @@ class UserCreateCommandTest extends KernelTestCase
         $result = $commandTester->execute([], ['interactive' => true]);
 
         $this->assertEquals(0, $result);
-        $this->assertRegExp('/Created user test@test.test/', $commandTester->getDisplay());
+        $this->assertMatchesRegularExpression('/Created user test@test.test/', $commandTester->getDisplay());
     }
 
     public function testInteractWithEmptyEmail(): void
