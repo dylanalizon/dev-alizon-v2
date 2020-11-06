@@ -51,7 +51,6 @@ class AppAuthenticatorTest extends TestCase
     /** @var AppAuthenticator */
     private AppAuthenticator $authenticator;
 
-
     protected function setUp(): void
     {
         $this->entityManager = $this->createMock(EntityManagerInterface::class);

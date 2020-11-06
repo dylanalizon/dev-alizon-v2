@@ -2,6 +2,9 @@
 
 namespace App\Tests;
 
+use ReflectionClass;
+use ReflectionException;
+
 trait TestHelper
 {
     /**
@@ -13,11 +16,11 @@ trait TestHelper
      *
      * @return mixed method return
      *
-     * @throws \ReflectionException
+     * @throws ReflectionException
      */
-    public function invokeMethod(object &$object, string $methodName, array $parameters = array())
+    public function invokeMethod(object &$object, string $methodName, array $parameters = [])
     {
-        $reflection = new \ReflectionClass(get_class($object));
+        $reflection = new ReflectionClass(get_class($object));
         $method = $reflection->getMethod($methodName);
         $method->setAccessible(true);
 

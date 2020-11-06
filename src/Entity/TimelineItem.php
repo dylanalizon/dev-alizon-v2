@@ -60,25 +60,17 @@ class TimelineItem
         return $this->title;
     }
 
-    /**
-     * @return int|null
-     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    /**
-     * @return string|null
-     */
     public function getTitle(): ?string
     {
         return $this->title;
     }
 
     /**
-     * @param string $title
-     *
      * @return $this
      */
     public function setTitle(string $title): self
@@ -88,17 +80,12 @@ class TimelineItem
         return $this;
     }
 
-    /**
-     * @return string|null
-     */
     public function getDescription(): ?string
     {
         return $this->description;
     }
 
     /**
-     * @param string $description
-     *
      * @return $this
      */
     public function setDescription(string $description): self
@@ -108,17 +95,12 @@ class TimelineItem
         return $this;
     }
 
-    /**
-     * @return int|null
-     */
     public function getPosition(): ?int
     {
         return $this->position;
     }
 
     /**
-     * @param int $position
-     *
      * @return $this
      */
     public function setPosition(int $position): self

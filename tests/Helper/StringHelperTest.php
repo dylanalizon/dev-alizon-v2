@@ -11,9 +11,7 @@ class StringHelperTest extends TestCase
     /**
      * @dataProvider provideTestContains
      *
-     * @param string          $haystack
      * @param string|string[] $needles
-     * @param bool            $expected
      */
     public function testContains(string $haystack, $needles, bool $expected): void
     {

@@ -5,6 +5,8 @@ namespace App\Tests\Command;
 use App\Command\UserCreateCommand;
 use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
+use Generator;
 use PHPUnit\Framework\MockObject\MockObject;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\Console\Application;
@@ -13,7 +15,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class UserCreateCommandTest extends KernelTestCase
 {
-    /** @var MockObject|UserPasswordEncoderInterface  */
+    /** @var MockObject|UserPasswordEncoderInterface */
     private MockObject $passwordEncoder;
 
     /** @var MockObject|EntityManagerInterface */
@@ -56,14 +58,14 @@ class UserCreateCommandTest extends KernelTestCase
         $result = $commandTester->execute([], ['interactive' => true]);
 
         $this->assertEquals(0, $result);
-        $this->assertRegExp("/Created user test@test.test/", $commandTester->getDisplay());
+        $this->assertRegExp('/Created user test@test.test/', $commandTester->getDisplay());
     }
 
     public function testInteractWithEmptyEmail(): void
     {
         $commandTester = $this->createCommandTester();
         $commandTester->setInputs(['']);
-        $this->expectException(\Exception::class);
+        $this->expectException(Exception::class);
         $commandTester->execute([], ['interactive' => true]);
     }
 
@@ -71,7 +73,7 @@ class UserCreateCommandTest extends KernelTestCase
     {
         $commandTester = $this->createCommandTester();
         $commandTester->setInputs(['test@test.test', '']);
-        $this->expectException(\Exception::class);
+        $this->expectException(Exception::class);
         $commandTester->execute([], ['interactive' => true]);
     }
 
@@ -83,10 +85,11 @@ class UserCreateCommandTest extends KernelTestCase
         $application->setAutoExit(false);
         $command = new UserCreateCommand($this->passwordEncoder, $this->em);
         $application->add($command);
+
         return new CommandTester($application->find('app:user:create'));
     }
 
-    public function provideUsers(): \Generator
+    public function provideUsers(): Generator
     {
         yield [['email' => 'test@test.test', 'password' => 'password'], 0];
         yield [['email' => 'test2@test2.test2', 'password' => 'password2', '--admin' => true], 0];

@@ -36,7 +36,7 @@ class ImageNormalizer implements NormalizerInterface, CacheableSupportsMethodInt
         $this->imageManager = $imageManager;
     }
 
-    public function normalize($object, string $format = null, array $context = array()): array
+    public function normalize($object, string $format = null, array $context = []): array
     {
         /** @var Image $object */
         $data = $this->normalizer->normalize($object, $format, $context);

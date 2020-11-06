@@ -1,0 +1,69 @@
+name: Tests
+on: [push]
+jobs:
+    php-tests:
+        name: PHP tests
+        runs-on: ${{ matrix.operating-system }}
+        strategy:
+            fail-fast: false
+            matrix:
+                operating-system: [ubuntu-latest]
+                php-versions: ['7.4']
+                node-version: ['14.15']
+        services:
+            mysql:
+                image: mysql:8.0
+                env:
+                    MYSQL_ROOT_PASSWORD: 'root'
+                ports:
+                    - 3306:3306
+        steps:
+            # -- Setup Github actions ----------------------------------------------------------------------------------
+            - name: Checkout
+              uses: actions/checkout@v2
+
+            # -- Setup PHP and composer --------------------------------------------------------------------------------
+            - name: Setup PHP, with composer and extensions
+              uses: shivammathur/setup-php@v2
+              with:
+                  php-version: ${{ matrix.php-versions }}
+                  extensions: mbstring, xml, ctype, iconv, intl
+                  coverage: xdebug
+
+            # -- Setup Node --------------------------------------------------------------------------------------------
+            - name: Setup Node
+              uses: actions/setup-node@v1
+              with:
+                  node-version: ${{ matrix.node-version }}
+
+            # -- Get Composer cache ------------------------------------------------------------------------------------
+            - name: Get composer cache directory
+              id: composer-cache
+              run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+            # -- Cache Composer deps -----------------------------------------------------------------------------------
+            - name: Cache composer dependencies
+              uses: actions/cache@v1
+              with:
+                  path: ${{ steps.composer-cache.outputs.dir }}
+                  key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+                  restore-keys: ${{ runner.os }}-composer-
+
+            # -- Install Composer deps ---------------------------------------------------------------------------------
+            - name: Install Composer dependencies
+              run: |
+                  composer install --no-progress --no-suggest --prefer-dist --optimize-autoloader
+
+            # -- PHP Lint ----------------------------------------------------------------------------------------------
+            - name: PHP linter
+              run: |
+                  php vendor/bin/php-cs-fixer fix --dry-run --using-cache=no --verbose
+
+            # -- Install and build front -------------------------------------------------------------------------------
+            - name: Install and build front
+              run: |
+                  yarn && yarn build
+
+            # -- Run tests ---------------------------------------------------------------------------------------------
+            - name: Run tests
+              run: php vendor/bin/simple-phpunit
