@@ -106,11 +106,9 @@ services:
       build:
         context: ./docker/mysql
         args:
-          - MYSQL_VERSION=5.7
+          - MYSQL_VERSION=latest
       environment:
-        - MYSQL_DATABASE=dev-alizon-v2
-        - MYSQL_USER=dev
-        - MYSQL_PASSWORD=dev
+        - MYSQL_DATABASE=dev_alizon_v2
         - MYSQL_ROOT_PASSWORD=root
         - TZ=UTC
       volumes:
