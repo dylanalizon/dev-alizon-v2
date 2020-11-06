@@ -67,3 +67,12 @@ jobs:
             # -- Run tests ---------------------------------------------------------------------------------------------
             - name: Run tests
               run: php vendor/bin/simple-phpunit
+
+            # -- Upload code coverage to Codecov -----------------------------------------------------------------------
+            - name: Upload coverage to Codecov
+              uses: codecov/codecov-action@v1
+              with:
+                token: ${{ secrets.CODECOV_TOKEN }}
+                file: ./var/coverage/logs/clover.xml
+                flags: tests
+                fail_ci_if_error: true
