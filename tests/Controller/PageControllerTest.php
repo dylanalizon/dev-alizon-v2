@@ -21,7 +21,6 @@ class PageControllerTest extends WebTestCase
         $client = static::createClient();
         $client->request('GET', '/mon-parcours');
         $response = $client->getResponse();
-        dd($response);
         $this->assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode());
         $this->assertPageTitleContains('Mon parcours');
         $this->assertSelectorTextContains('h1', 'Mon parcours');
