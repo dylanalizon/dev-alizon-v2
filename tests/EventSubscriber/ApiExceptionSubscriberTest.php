@@ -24,7 +24,6 @@ class ApiExceptionSubscriberTest extends TestCase
         $subscriber = new ApiExceptionSubscriber();
         $subscriber->onKernelException($event);
         $this->assertInstanceOf(ValidationFailedJsonResponse::class, $event->getResponse());
-
     }
 
     public function testOnKernelExceptionWithoutValidationFailedApiException(): void
