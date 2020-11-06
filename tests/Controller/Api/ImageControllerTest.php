@@ -16,7 +16,7 @@ class ImageControllerTest extends WebTestCase
 
     public function setUp(): void
     {
-        $this->client = static::createClient();
+        $this->client = static::createClient([], ['HTTP_ACCEPT' => 'application/json']);
         $userRepository = static::$container->get(UserRepository::class);
         $testUser = $userRepository->findOneBy([]);
         $this->client->loginUser($testUser);
@@ -84,8 +84,8 @@ class ImageControllerTest extends WebTestCase
         $this->assertEquals(Response::HTTP_UNPROCESSABLE_ENTITY, $response->getStatusCode());
         $content = json_decode($response->getContent(), true);
         $this->assertIsArray($content);
-        $this->assertArrayHasKey('message', $content);
-        $this->assertEquals("Erreur pendant l'upload de l'image.", $content['message']);
+        $this->assertArrayHasKey('errors', $content);
+        $this->assertArrayHasKey('code', $content);
     }
 
     public function testDelete(): void

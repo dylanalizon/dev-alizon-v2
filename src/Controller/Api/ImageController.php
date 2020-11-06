@@ -8,18 +8,16 @@ use App\Repository\ImageRepository;
 use App\Service\ImageManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Swagger\Annotations as SWG;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 /**
  * @Route("/api/images")
  * @SWG\Tag(name="Images")
  */
-class ImageController extends AbstractController
+class ImageController extends AbstractApiController
 {
     /**
      * List the images by year.
@@ -83,23 +81,14 @@ class ImageController extends AbstractController
      *     @SWG\Schema(type="object", ref="#/definitions/image")
      * )
      */
-    public function create(Request $request, EntityManagerInterface $em, TranslatorInterface $translator): JsonResponse
+    public function create(Request $request, EntityManagerInterface $em): JsonResponse
     {
         $image = new Image();
-        $form = $this->createForm(ImageType::class, $image);
+        $this->handleApiRequest($request, ImageType::class, $image, true);
+        $em->persist($image);
+        $em->flush();
 
-        $data = ['file' => $request->files->get('file')];
-        $form->submit($data);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $em->persist($image);
-            $em->flush();
-
-            return $this->json($image, Response::HTTP_CREATED, [], ['groups' => 'image:read']);
-        }
-
-        return $this->json([
-            'message' => $translator->trans('image.error.create', [], 'api'),
-        ], Response::HTTP_UNPROCESSABLE_ENTITY);
+        return $this->json($image, Response::HTTP_CREATED, [], ['groups' => 'image:read']);
     }
 
     /**
