@@ -59,6 +59,19 @@ jobs:
               run: |
                   php vendor/bin/php-cs-fixer fix --dry-run --using-cache=no --verbose
 
+            # -- Get Yarn cache ----------------------------------------------------------------------------------------
+            - name: Get node.js cache directory
+              id: nodecache
+              run: echo "::set-output name=dir::$(yarn cache dir)"
+
+            # -- Cache Yarn deps ---------------------------------------------------------------------------------------
+            - name: Cache dependencies
+              uses: actions/cache@v2
+              with:
+                path: ${{ steps.nodecache.outputs.dir }}
+                key: ${{ runner.os }}-node-${{ hashFiles('**/yarn.lock') }}
+                restore-keys: ${{ runner.os }}-node-
+
             # -- Install and build front -------------------------------------------------------------------------------
             - name: Install and build front
               run: |
