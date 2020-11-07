@@ -14,43 +14,40 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 class TimelineItem
 {
     /**
-     * @var int
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id = null;
 
     /**
-     * @var string
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank()
      */
-    private $title;
+    private string $title = '';
 
     /**
-     * @var string
      * @ORM\Column(type="text")
      * @Assert\NotBlank()
      */
-    private $description;
+    private string $description = '';
 
     /**
      * @Gedmo\SortablePosition
      * @ORM\Column(type="smallint")
      * @Assert\Range(min = 0)
      */
-    private $position;
+    private ?int $position = null;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $subtitle;
+    private ?string $subtitle = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Image")
      */
-    private $image;
+    private ?Image $image = null;
 
     /**
      * @return string

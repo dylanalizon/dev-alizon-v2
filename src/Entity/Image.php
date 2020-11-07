@@ -16,37 +16,33 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 class Image
 {
     /**
-     * @var int
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id = null;
 
     /**
-     * @var string
      * @ORM\Column(type="string", length=255)
      */
-    private $fileName;
+    private ?string $fileName;
 
     /**
-     * @var File
      * @Vich\UploadableField(mapping="images", fileNameProperty="fileName", size="fileSize")
      * @Assert\Image()
      * @Assert\NotNull
      */
-    private $file;
+    private ?File $file = null;
 
     /**
-     * @var DateTimeInterface
      * @ORM\Column(type="datetime")
      */
-    private $createdAt;
+    private DateTimeInterface $createdAt;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $fileSize;
+    private ?int $fileSize;
 
     public function __construct()
     {

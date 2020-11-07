@@ -17,39 +17,39 @@ class Skill
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id = null;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $name;
+    private string $name = '';
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Image")
      */
-    private $image;
+    private ?Image $image = null;
 
     /**
      * @ORM\Column(type="text")
      */
-    private $description;
+    private string $description = '';
 
     /**
      * @Gedmo\SortableGroup
      * @ORM\ManyToOne(targetEntity="App\Entity\Skill", inversedBy="children")
      */
-    private $parent;
+    private ?self $parent = null;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Skill", mappedBy="parent")
      */
-    private $children;
+    private Collection $children;
 
     /**
      * @Gedmo\SortablePosition
      * @ORM\Column(type="integer")
      */
-    private $position;
+    private ?int $position;
 
     public function __construct()
     {

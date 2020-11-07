@@ -14,36 +14,27 @@ use Symfony\Component\Validator\Constraints as Assert;
 class User implements UserInterface
 {
     /**
-     * @var int
-     *
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id = null;
 
-    /**
-     * @var string
-     *
+    /*
      * @ORM\Column(type="string", length=180, unique=true)
-     *
      * @Assert\Email()
      */
-    private $email;
+    private string $email = '';
 
     /**
-     * @var array
-     *
      * @ORM\Column(type="json")
      */
-    private $roles = [];
+    private array $roles = [];
 
     /**
-     * @var string The hashed password
-     *
      * @ORM\Column(type="string")
      */
-    private $password;
+    private string $password = '';
 
     public function __toString()
     {
@@ -122,5 +113,6 @@ class User implements UserInterface
      */
     public function eraseCredentials()
     {
+        $this->password = '';
     }
 }
