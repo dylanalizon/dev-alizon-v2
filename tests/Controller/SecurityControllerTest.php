@@ -4,7 +4,6 @@ namespace App\Tests\Controller;
 
 use App\Controller\SecurityController;
 use App\Repository\UserRepository;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestAssertionsTrait;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\HttpFoundation\Response;
 
