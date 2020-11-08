@@ -3,7 +3,6 @@
 @import 'libs/mixins';
 @import 'libs/vendor';
 @import 'libs/breakpoints';
-@import 'libs/grid';
 @import 'libs/flexgrid';
 @import url('https://fonts.googleapis.com/css?family=Raleway:200,300,400,500,600');
 
@@ -27,12 +26,7 @@
 // Color.
 @mixin color($p) {
   @include color-typography($p);
-  @include color-button($p);
-  @include color-form($p);
   @include color-list($p);
-  @include color-table($p);
-  @include color-highlights($p);
-  @include color-testimonials($p);
 }
 
 // Base.
@@ -42,17 +36,8 @@
 
 // Component.
 @import 'components/inner';
-@import 'components/button';
-@import 'components/form';
 @import 'components/list';
-@import 'components/table';
-@import 'components/highlights';
-@import 'components/testimonials';
-@import 'components/actions';
-@import 'components/grid';
 @import 'components/icon';
-@import 'components/icons';
-@import 'components/image';
 @import 'components/wrapper';
 
 // Layout.

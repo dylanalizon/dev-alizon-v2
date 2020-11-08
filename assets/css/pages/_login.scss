@@ -4,6 +4,7 @@
     align-items: center;
     justify-content: center;
     height: calc(100vh - 65px);
+    flex-direction: column;
 
     h1 {
       font-family: $font-h1;
