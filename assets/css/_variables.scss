@@ -31,3 +31,8 @@ $input-icon-size: 2rem;
 $placeholder-text-color: lighten($input-border-color, 20%);
 $small-and-down: "only screen and (max-width : 601px)";
 $medium-and-down: "only screen and (max-width : 993px)";
+
+// Checkboxes
+$radio-fill-color: $color-primary;
+$radio-empty-color: #5a5a5a;
+$radio-border: 2px solid $radio-fill-color;

@@ -17,6 +17,7 @@ security:
         main:
             anonymous: true
             lazy: true
+            provider: app_user_provider
             guard:
                 authenticators:
                     - App\Security\AppAuthenticator
@@ -29,4 +30,4 @@ security:
 
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/api, roles: ROLE_ADMIN }
+        - { path: ^/api, roles: ROLE_ADMIN }

@@ -6,8 +6,15 @@
     height: calc(100vh - 65px);
     flex-direction: column;
 
-    h1 {
-      font-family: $font-h1;
+    .card {
+      padding: 2rem;
+      width: 450px;
+      max-width: 90%;
+
+      h1 {
+        text-align: center;
+        font-family: $font-h1;
+      }
     }
   }
 }

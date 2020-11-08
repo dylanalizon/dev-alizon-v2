@@ -18,7 +18,7 @@
     color: #ffffff;
   }
 
-  &:hover, &.btn-white:hover {
+  &:hover, &.btn-white:hover, &:focus, &.btn-white:focus {
     background: $color-primary;
     border-color: $color-primary;
     color: #fff;

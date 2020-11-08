@@ -8,32 +8,46 @@
 
 {% block body %}
     <section>
-        <h1>{{ 'login.h1'|trans }}</h1>
-        <form method="POST">
-            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-            <div class="input-group">
-                <input
-                        id="email"
-                        type="email"
-                        value="{{ last_username }}"
-                        name="email"
-                        autocomplete="off"
-                        required
-                        autofocus
-                />
-                <label for="email">{{ 'login.email_label'|trans }}</label>
-            </div>
-            <div class="input-group">
-                <input
-                        id="password"
-                        type="password"
-                        name="password"
-                        required
-                />
-                <label for="password">{{ 'login.password_label'|trans }}</label>
-            </div>
-            <input type="checkbox" name="_remember_me"> {{ 'login.remember_me'|trans }}
-            <button type="submit">{{ 'login.sign_in'|trans }}</button>
-        </form>
+        <div class="card">
+            <h1>{{ 'login.h1'|trans }}</h1>
+            {% if error %}
+                <div class="alert alert-error mb-10">
+                    {{ error.messageKey|trans(error.messageData, 'security') }}
+                </div>
+            {% endif %}
+            <form method="POST">
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                <div class="input-group">
+                    <input
+                            id="email"
+                            type="email"
+                            value="{{ last_username }}"
+                            name="email"
+                            autocomplete="off"
+                            required
+                            autofocus
+                    />
+                    <label for="email">{{ 'login.email_label'|trans }}</label>
+                </div>
+                <div class="input-group">
+                    <input
+                            id="password"
+                            type="password"
+                            name="password"
+                            required
+                    />
+                    <label for="password">{{ 'login.password_label'|trans }}</label>
+                </div>
+                <div class="mb-8">
+                    <label>
+                        <input type="checkbox" name="_remember_me">
+                        <span>{{ 'login.remember_me'|trans }}</span>
+                    </label>
+                </div>
+                <div class="text-center">
+                    <button class="btn" type="submit">{{ 'login.sign_in'|trans }}</button>
+                </div>
+            </form>
+        </div>
     </section>
 {% endblock %}

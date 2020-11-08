@@ -9,12 +9,13 @@
 @import "theme/theme";
 
 // Components
+@import "components/alert";
 @import "components/button";
 @import "components/card";
 @import "components/scrollbar";
 @import "components/progress-bar";
 @import "components/timeline";
-@import "components/forms";
+@import "components/forms/forms";
 
 // Layouts
 @import "layouts/navbar";
