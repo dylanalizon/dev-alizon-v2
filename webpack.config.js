@@ -34,7 +34,6 @@ Encore
     config.useBuiltIns = 'usage';
     config.corejs = 3;
   })
-  .autoProvidejQuery()
 ;
 
 module.exports = Encore.getWebpackConfig();
