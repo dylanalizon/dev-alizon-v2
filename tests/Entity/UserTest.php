@@ -22,8 +22,7 @@ class UserTest extends TestCase
         $this->assertSame(array_merge($roles, ['ROLE_USER']), $user->getRoles());
         $this->assertSame($password, $user->getPassword());
         $this->assertSame($email, (string) $user);
-        $user->eraseCredentials();
-        $this->assertEmpty($user->getPassword());
         $this->assertNull($user->getSalt());
+        $this->assertNull($user->eraseCredentials());
     }
 }

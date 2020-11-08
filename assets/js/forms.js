@@ -1,4 +1,4 @@
-const input_selector = [
+const inputSelector = [
   'input[type=text]',
   'input[type=email]',
   'input[type=password]',
@@ -10,9 +10,13 @@ const input_selector = [
   'input[type=time]',
   'textarea'
 ]
+const radioSelector = [
+  'input[type=radio]',
+  'input[type=checkbox]'
+]
 
 const updateTextFields = () => {
-  const inputs = document.querySelectorAll(String(input_selector));
+  const inputs = document.querySelectorAll(String(inputSelector));
   inputs.forEach((input) => {
     const label = input.parentNode.querySelector('label');
     if (!label) {
@@ -35,7 +39,7 @@ document.addEventListener(
   'focus',
   e => {
     const target = e.target;
-    if (target.matches(String(input_selector))) {
+    if (target.matches(String(inputSelector))) {
       const label = target.parentNode.querySelector('label');
       if (label) {
         label.classList.add('active');
@@ -52,7 +56,7 @@ document.addEventListener(
   'blur',
   e => {
     const target = e.target;
-    if (target.matches(String(input_selector))) {
+    if (target.matches(String(inputSelector))) {
       if (target.value.length === 0 && !target.placeholder) {
         const label = target.parentNode.querySelector('label');
         if (label) {
@@ -63,3 +67,19 @@ document.addEventListener(
   },
   true
 );
+
+/**
+ *  Focus on radios and checkboxes
+ */
+document.addEventListener('keyup', e => {
+  const target = e.target;
+  if (!target.matches(String(radioSelector))) {
+    return;
+  }
+  if (e.code === 'Tab') {
+    target.classList.add('tabbed');
+    target.addEventListener('blur', () => {
+      target.classList.remove('tabbed');
+    }, { once: true });
+  }
+});

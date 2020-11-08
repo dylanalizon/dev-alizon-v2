@@ -1,6 +1,3 @@
-/* Text Inputs + Textarea
-   ========================================================================== */
-
 /* Style Placeholders */
 ::placeholder {
   color: $placeholder-text-color;
@@ -8,19 +5,9 @@
 
 /* Text inputs */
 
-input:not([type]):not(.browser-default),
-input[type=text]:not(.browser-default),
-input[type=password]:not(.browser-default),
-input[type=email]:not(.browser-default),
-input[type=url]:not(.browser-default),
-input[type=time]:not(.browser-default),
-input[type=date]:not(.browser-default),
-input[type=datetime]:not(.browser-default),
-input[type=datetime-local]:not(.browser-default),
-input[type=tel]:not(.browser-default),
-input[type=number]:not(.browser-default),
-input[type=search]:not(.browser-default),
-textarea {
+input:not([type]), input[type=text], input[type=password], input[type=email], input[type=url], input[type=time],
+input[type=date], input[type=datetime], input[type=datetime-local], input[type=tel], input[type=number],
+input[type=search], textarea {
 
   // General Styles
   background-color: transparent;
@@ -66,19 +53,23 @@ textarea {
   &:focus.valid ~ .helper-text[data-success],
   &.invalid ~ .helper-text[data-error],
   &:focus.invalid ~ .helper-text[data-error] {
-    @extend %hidden-text;
+    color: transparent;
+    user-select: none;
+    pointer-events: none;
   }
 
   // Valid Input Style
   &.valid,
   &:focus.valid {
-    @extend %valid-input-style;
+    border-bottom: 1px solid $input-success-color;
+    box-shadow: 0 1px 0 0 $input-success-color;
   }
 
   // Custom Success Message
   &.valid ~ .helper-text:after,
   &:focus.valid ~ .helper-text:after {
-    @extend %custom-success-message;
+    content: attr(data-success);
+    color: $input-success-color;
   }
   &:focus.valid ~ label {
     color: $input-success-color;
@@ -87,13 +78,15 @@ textarea {
   // Invalid Input Style
   &.invalid,
   &:focus.invalid {
-    @extend %invalid-input-style;
+    border-bottom: $input-invalid-border;
+    box-shadow: 0 1px 0 0 $input-error-color;
   }
 
   // Custom Error message
   &.invalid ~ .helper-text:after,
   &:focus.invalid ~ .helper-text:after {
-    @extend %custom-error-message;
+    content: attr(data-error);
+    color: $input-error-color;
   }
   &:focus.invalid ~ label {
     color: $input-error-color;
@@ -106,43 +99,15 @@ textarea {
 
   // Form Message Shared Styles
   & + label:after {
-    @extend %input-after-style;
+    display: block;
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 0;
+    opacity: 0;
+    transition: .2s opacity ease-out, .2s color ease-out;
   }
 }
-
-
-/* Validation Sass Placeholders */
-%valid-input-style {
-  border-bottom: 1px solid $input-success-color;
-  box-shadow: 0 1px 0 0 $input-success-color;
-}
-%invalid-input-style {
-  border-bottom: $input-invalid-border;
-  box-shadow: 0 1px 0 0 $input-error-color;
-}
-%hidden-text {
-  color: transparent;
-  user-select: none;
-  pointer-events: none;
-}
-%custom-success-message {
-  content: attr(data-success);
-  color: $input-success-color;
-}
-%custom-error-message {
-  content: attr(data-error);
-  color: $input-error-color;
-}
-%input-after-style {
-  display: block;
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 0;
-  opacity: 0;
-  transition: .2s opacity ease-out, .2s color ease-out;
-}
-
 
 // Styling for input field wrapper
 .input-group {
@@ -170,9 +135,9 @@ textarea {
   }
 
   // Autofill + date + time inputs
-  & > input[type]:-webkit-autofill:not(.browser-default):not([type="search"]) + label,
-  & > input[type=date]:not(.browser-default) + label,
-  & > input[type=time]:not(.browser-default) + label {
+  & > input[type]:-webkit-autofill:not([type="search"]) + label,
+  & > input[type=date] + label,
+  & > input[type=time] + label {
     transform: translateY(-14px) scale(.8);
     transform-origin: 0 0;
   }

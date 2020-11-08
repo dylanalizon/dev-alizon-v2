@@ -29,6 +29,8 @@ class AppAuthenticator extends AbstractFormLoginAuthenticator implements Passwor
 {
     use TargetPathTrait;
 
+    public const LOGIN_ROUTE = 'app_login';
+
     private EntityManagerInterface $entityManager;
     private UrlGeneratorInterface $urlGenerator;
     private CsrfTokenManagerInterface $csrfTokenManager;
@@ -54,7 +56,7 @@ class AppAuthenticator extends AbstractFormLoginAuthenticator implements Passwor
 
     public function supports(Request $request)
     {
-        return 'app_login' === $request->attributes->get('_route')
+        return self::LOGIN_ROUTE === $request->attributes->get('_route')
             && $request->isMethod('POST');
     }
 
@@ -83,7 +85,6 @@ class AppAuthenticator extends AbstractFormLoginAuthenticator implements Passwor
         $user = $this->entityManager->getRepository(User::class)->findOneBy(['email' => $credentials['email']]);
 
         if (!$user) {
-            // fail authentication with a custom error
             throw new CustomUserMessageAuthenticationException($this->translator->trans('errors.bad_credentials'));
         }
 
@@ -114,7 +115,7 @@ class AppAuthenticator extends AbstractFormLoginAuthenticator implements Passwor
 
     protected function getLoginUrl()
     {
-        return $this->urlGenerator->generate('app_login');
+        return $this->urlGenerator->generate(self::LOGIN_ROUTE);
     }
 
     /**

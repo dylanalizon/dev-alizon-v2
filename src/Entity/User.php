@@ -20,7 +20,7 @@ class User implements UserInterface
      */
     private ?int $id = null;
 
-    /*
+    /**
      * @ORM\Column(type="string", length=180, unique=true)
      * @Assert\Email()
      */
@@ -113,6 +113,5 @@ class User implements UserInterface
      */
     public function eraseCredentials()
     {
-        $this->password = '';
     }
 }
