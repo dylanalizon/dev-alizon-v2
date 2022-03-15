@@ -25,7 +25,7 @@
         "axios": "^0.21.0",
         "es6-promise": "^4.2.8",
         "es6-promise-polyfill": "^1.2.0",
-        "lodash-es": "^4.17.15",
+        "lodash-es": "^4.17.21",
         "tailwindcss": "^1.2.0",
         "turbolinks": "^5.2.0"
     },
